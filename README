@@ -1,0 +1,66 @@
+gr-display is a small qt based addon for gnuradio to display png images.
+I use it to receive and display some weather- satellite pictures with the funcube dongle
+and gnuradio.
+
+
+1. Dependencies:
+
+- gnuradio
+- gr-qtgui
+- qt4 ( tested with qt4.8 )
+
+
+2. Installation
+
+get the latest code from https://github.com/dl1ksv/gr-display
+
+The build process is cmake based. So change to code directory.
+There
+$mkdir build
+$cd build
+$cmake -DINSTALL_PREFIX=<where gnuradio is install>
+$make
+$su
+$make install
+
+After that you'll find in grc in QT GUI WIDGETS a PNG Image sink.
+
+
+3. To do
+
+- Saving picture to file.
+- Perhaps do some simple image processing like rotating before saving.
+
+
+4. Using the example
+
+The example is based on the assumtion that the input device is named FCD. This can be achieved
+by the following lines in the .asoundrc file in the home directory:
+
+pcm.V10_card {
+        type hw
+        card V10
+}
+ctl.V10_card {
+        type hw
+        card V10
+        }
+        
+pcm.FCD {
+        type plug
+        slave.pcm V10_card
+}
+
+
+5. Known Problems
+
+You should use libusb-1.0.8. Other versions of libusb or libusbx lead to a sudden finish of the example.
+A bug is reported, but up to now there is no fix available.
+
+
+6. Credits
+
+The apt decoder part is based on an decoder prototype by  Alexandru Csete, OZ9AEC.
+
+http://www.oz9aec.net/index.php/gnu-radio/gnu-radio-blog/440-simple-apt-decoder-prototype
+
