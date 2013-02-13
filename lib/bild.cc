@@ -44,18 +44,12 @@ void bild::setNextPixel(int i)
    line = (QRgb *) p->scanLine(row);
   }
 }
-/**
-void bild::loadImage(QString datei)
+
+bool bild::saveImage(QString datei)
 {
-  if (p != 0)
-    delete p;
-  p=new QImage(datei);
-  qDebug("Image Größe: %d , %d , Tiefe: %d, Format %d",p->width(),p->height(),p->depth(),p->format());
-  //resize(p->width(),p->height());
-  //adjustSize();
-  update();
+    return p->save(datei,"PNG");
 }
-**/
+
 void bild::paintEvent(QPaintEvent *)
 {
 

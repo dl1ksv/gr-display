@@ -30,6 +30,7 @@ private:
 
 public slots:
     void setPixel(const unsigned char *,int);
+    void saveImage2File();
 
 protected:
    // void paintEvent(QPaintEvent *);

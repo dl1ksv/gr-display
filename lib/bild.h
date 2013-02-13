@@ -15,6 +15,7 @@ class bild : public QWidget {
 public:
     bild(int,int);
     virtual ~bild();
+    bool saveImage(QString);
 private:
     QImage *p;
     int picWidth;
@@ -25,7 +26,6 @@ private:
 
 public slots:
     void setNextPixel(int);
-//    void loadImage(QString);
 protected:
     void paintEvent(QPaintEvent *);
 };
