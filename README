@@ -18,7 +18,7 @@ The build process is cmake based. So change to code directory.
 There
 $mkdir build
 $cd build
-$cmake -DINSTALL_PREFIX=<where gnuradio is install>
+$cmake -DCMAKE_INSTALL_PREFIX=<where gnuradio is install>
 $make
 $su
 $make install

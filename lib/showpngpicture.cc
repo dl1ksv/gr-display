@@ -22,6 +22,7 @@ ShowPngPicture::ShowPngPicture(int width,int height,QWidget *parent) :
     displayTimer = new QTimer(this);
     connect(displayTimer, SIGNAL(timeout()),displayWidget,SLOT(update()));
     connect(ui->saveButton,SIGNAL(clicked()),this,SLOT(saveImage2File()));
+    connect(ui->reverse,SIGNAL(clicked(bool)),displayWidget,SLOT(storeReverse(bool)));
     displayTimer->start(500);
 
 }

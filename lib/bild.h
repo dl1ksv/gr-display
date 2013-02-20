@@ -23,9 +23,11 @@ private:
     int col;
     int row;
     QRgb *line;
+    bool reverseOrder;
 
 public slots:
     void setNextPixel(int);
+    void storeReverse(bool order);
 protected:
     void paintEvent(QPaintEvent *);
 };
