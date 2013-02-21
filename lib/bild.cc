@@ -17,6 +17,7 @@ bild::bild(int width,int height)
   p= 0;
   row=0;
   col=0;
+  reverseOrder=false;
   this->setFixedSize(picWidth+20,picHeight+20);
   p=new QImage(picWidth,picHeight,QImage::Format_RGB32);
   p->fill(64);
