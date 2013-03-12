@@ -41,9 +41,9 @@ display_make_show_image (int imagewidth,int imageheight,QWidget *parent)
  */
 display_show_image::display_show_image (int imagewidth,int imageheight,QWidget *parent)
   : gr_sync_block ("show_image",
-		   gr_make_io_signature(1, 1, sizeof (char)),
+           gr_make_io_signature(2, 2, sizeof (char)),
 		   gr_make_io_signature(0, 0, 0)),
-		    width(imagewidth),height(imageheight),d_parent(parent)
+           d_width(imagewidth),d_height(imageheight),d_parent(parent)
 {
     d_main_gui = NULL;
     if(qApp != NULL) {
@@ -54,7 +54,8 @@ display_show_image::display_show_image (int imagewidth,int imageheight,QWidget *
       char **argv = NULL;
       d_qApplication = new QApplication(argc, argv);
     }
-    d_main_gui = new ShowPngPicture(width,height,d_parent);
+    d_main_gui = new ShowPngPicture(d_width,d_height,d_parent);
+    d_triggered=false;
 
 }
 
@@ -74,18 +75,32 @@ display_show_image::work(int noutput_items,
 		  gr_vector_void_star &output_items)
 {
         const unsigned char *in = (const unsigned char *) input_items[0];
+        const char *ctrl = (const char *)input_items[1];
+        if(d_triggered) {
         // Do signal processing
          d_main_gui->setPixel(in,noutput_items);
+        }
+        else {
+            int i;
+            while (i < noutput_items && ctrl[i] == 0) {
+                i++;
+            }
+            if(i < noutput_items) {
+                d_triggered=true;
+                d_main_gui->setPixel(in+i,noutput_items-i);
+            }
+        }
         // Tell runtime system how many output items we produced.
-	return noutput_items;
+    return noutput_items;
 }
-/**
-QWidget *display_show_image::qwidget()
+
+QWidget *
+display_show_image::qwidget()
 {
   return d_main_gui;
 }
-**/
-PyObject *display_show_image::pyqwidget()
+PyObject *
+display_show_image::pyqwidget()
 {
 
  PyObject *w = PyLong_FromVoidPtr((void*)d_main_gui);
@@ -95,6 +110,5 @@ PyObject *display_show_image::pyqwidget()
 
 void display_show_image::exec_()
 {
-std::cout << "Calling exec" << std::endl;
  d_qApplication->exec();
 }

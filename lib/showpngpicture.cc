@@ -16,7 +16,6 @@ ShowPngPicture::ShowPngPicture(int width,int height,QWidget *parent) :
     picWidth=width;
     picHeight=height;
 
- //   this->setFixedSize(picWidth+10,picHeight+10);
     displayWidget= new bild(picWidth,picHeight);
     ui->displayArea->setWidget(displayWidget);
     displayTimer = new QTimer(this);

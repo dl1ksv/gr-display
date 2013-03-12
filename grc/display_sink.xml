@@ -42,10 +42,12 @@ $(gui_hint()($win))</make>
   <sink>
     <name>in</name>
     <type>byte</type>
-    <vlen>1</vlen>
-    <nports>1</nports>
   </sink>
-	<doc>
+  <sink>
+    <name>ctrl</name>
+    <type>byte</type>
+  </sink>
+  <doc>
 The GUI hint can be used to position the widget within the application. \
 The hint is of the form [tab_id@tab_index]: [row, col, row_span, col_span]. \
 Both the tab specification and the grid position are optional.

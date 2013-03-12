@@ -62,13 +62,14 @@ class DISPLAY_API display_show_image : public gr_sync_block
 
 
    int nx_samples;
-   int width;
-   int height;
+   int d_width;
+   int d_height;
+   bool d_triggered;
 
  public:
   ~display_show_image();
    void exec_();
- //  QWidget*  qwidget();
+   QWidget*  qwidget();
    PyObject* pyqwidget();
    QApplication *d_qApplication;
 

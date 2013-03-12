@@ -32,5 +32,6 @@ private:
 public:
   void exec_();
   PyObject* pyqwidget();
+  QWidget*  qwidget();
 
 };
