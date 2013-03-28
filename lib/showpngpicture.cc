@@ -48,9 +48,11 @@ void ShowPngPicture::saveImage2File()
     dir=QDir::homePath();
 
     fileName = QFileDialog::getSaveFileName ( 0, tr ( "Save Image" ),dir , "*.png" );
-    if ( !fileName.isEmpty() )
+    if ( !fileName.isEmpty() ) {
        ok= displayWidget->saveImage(fileName);
-    if(ok)
+       if(ok) {
         QMessageBox::information ( 0, "gr-display", QString("Image saved to file: ") + fileName);
+       }
+    }
 
 }

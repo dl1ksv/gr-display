@@ -18,7 +18,7 @@ The build process is cmake based. So change to code directory.
 There
 $mkdir build
 $cd build
-$cmake -DCMAKE_INSTALL_PREFIX=<where gnuradio is install>
+$cmake -DCMAKE_INSTALL_PREFIX=<where gnuradio is installed> ../
 $make
 $su
 $make install
@@ -28,7 +28,6 @@ After that you'll find in grc in QT GUI WIDGETS a PNG Image sink.
 
 3. To do
 
-- Saving picture to file.
 - Perhaps do some simple image processing like rotating before saving.
 
 
