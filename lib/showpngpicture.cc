@@ -6,7 +6,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "bild.h"
 
 ShowPngPicture::ShowPngPicture(int width,int height,QWidget *parent) :
     QWidget(parent),
@@ -16,12 +15,19 @@ ShowPngPicture::ShowPngPicture(int width,int height,QWidget *parent) :
     picWidth=width;
     picHeight=height;
 
-    displayWidget= new bild(picWidth,picHeight);
-    ui->displayArea->setWidget(displayWidget);
+    ui->displayWidget->setFixedSize(picWidth+20,picHeight+20);
+
+    p=new QImage(picWidth,picHeight,QImage::Format_RGB32);
+    p->fill(64);
+    row=0;
+    col=0;
+    line = (QRgb *) p->scanLine(row);
+    reverseOrder = false;
+
     displayTimer = new QTimer(this);
-    connect(displayTimer, SIGNAL(timeout()),displayWidget,SLOT(update()));
+    connect(displayTimer, SIGNAL(timeout()),this,SLOT(update()));
     connect(ui->saveButton,SIGNAL(clicked()),this,SLOT(saveImage2File()));
-    connect(ui->reverse,SIGNAL(clicked(bool)),displayWidget,SLOT(storeReverse(bool)));
+    connect(ui->reverse,SIGNAL(clicked(bool)),this,SLOT(storeReverse(bool)));
     displayTimer->start(500);
 
 }
@@ -37,7 +43,7 @@ void ShowPngPicture::setPixel(const unsigned char *c,int items)
     for(int i=0; i <items;i++)
     {
      j=c[i];
-     displayWidget->setNextPixel(j);
+     setNextPixel(j);
     } 
 }
 void ShowPngPicture::saveImage2File()
@@ -49,10 +55,68 @@ void ShowPngPicture::saveImage2File()
 
     fileName = QFileDialog::getSaveFileName ( 0, tr ( "Save Image" ),dir , "*.png" );
     if ( !fileName.isEmpty() ) {
-       ok= displayWidget->saveImage(fileName);
+       ok= saveImage(fileName);
        if(ok) {
         QMessageBox::information ( 0, "gr-display", QString("Image saved to file: ") + fileName);
        }
     }
 
+}
+
+void  ShowPngPicture::setNextPixel(int i)
+{
+
+  line[col]=qRgb(i,i,i);
+  if(!reverseOrder)
+  {
+   col++;
+   if(col >= picWidth)
+   {
+    col=0;
+    row++;
+    if(row >=picHeight)
+      row= picHeight-1; // Later scroll up
+   line = (QRgb *) p->scanLine(row);
+   }
+  }
+  else
+  {
+   col--;
+   if (col < 0)
+   {
+     col=picWidth-1;
+     row--;
+     if(row < 0)
+         row=0;
+     line = (QRgb *) p->scanLine(row);
+   }
+  }
+}
+void ShowPngPicture::paintEvent(QPaintEvent *)
+{
+
+  if(p > 0)
+    ui->displayWidget->setPixmap(QPixmap::fromImage(*p));
+}
+bool ShowPngPicture::saveImage(QString datei)
+{
+    return p->save(datei,"PNG");
+}
+void ShowPngPicture::storeReverse(bool order)
+{
+ if(reverseOrder == order)
+     return;
+ reverseOrder=order;
+ p->fill(64);
+ if(reverseOrder)
+ {
+   row=picHeight-1;
+   col=picWidth-1;
+ }
+ else
+ {
+   row=0;
+   col=0;
+ }
+ line = (QRgb *) p->scanLine(row);
 }

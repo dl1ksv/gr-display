@@ -6,8 +6,8 @@
  -->
 <block>
 	<name>PNG Image Sink</name>
-	<key>display_show_image</key>
-	<category>QT GUI Widgets</category>
+	<key>show_image</key>
+	<category>Instrumentation/QT</category>
 	<import>from PyQt4 import Qt</import>
 	<import>from gnuradio.qtgui import qtgui</import>
 	<import>import display</import>

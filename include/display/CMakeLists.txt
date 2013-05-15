@@ -1,4 +1,4 @@
-# Copyright 2011 Free Software Foundation, Inc.
+# Copyright 2011,2012 Free Software Foundation, Inc.
 #
 # This file is part of GNU Radio
 #
@@ -21,6 +21,6 @@
 # Install public header files
 ########################################################################
 install(FILES
-    display_api.h
-    display_show_image.h DESTINATION include/display
+    api.h
+    show_image.h DESTINATION include/display
 )

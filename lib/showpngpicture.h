@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-class bild;
 class QTimer;
+class QImage;
 
 namespace Ui {
 class ShowPngPicture;
@@ -23,17 +23,24 @@ private:
     int picHeight;
     int col;
     int row;
+    bool reverseOrder;
+
+    QImage *p;
     QRgb *line;
-    bild *displayWidget;
+    QWidget *displayWidget;
     QTimer *displayTimer;
+
+    void setNextPixel(int);
+    bool saveImage(QString);
 
 
 public slots:
     void setPixel(const unsigned char *,int);
     void saveImage2File();
+    void storeReverse(bool order);
 
 protected:
-   // void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *);
 };
 
 #endif // SHOWPNGPICTURE_HH

@@ -22,7 +22,7 @@
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="bild">
+     <widget class="QLabel" name="displayWidget">
       <property name="geometry">
        <rect>
         <x>0</x>

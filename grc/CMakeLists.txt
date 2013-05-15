@@ -17,5 +17,6 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-file(GLOB xml_files "*.xml")
-install(FILES ${xml_files} DESTINATION share/gnuradio/grc/blocks )
+install(FILES
+    display_show_image.xml DESTINATION share/gnuradio/grc/blocks
+)

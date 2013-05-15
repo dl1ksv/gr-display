@@ -1,4 +1,6 @@
-# Copyright 2011 Free Software Foundation, Inc.
+# Copyright 2011,2012 Free Software Foundation, Inc.
+#
+# This file is part of GNU Radio
 #
 # GNU Radio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,25 +21,28 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
+
+include_directories(${Boost_INCLUDE_DIR})
+link_directories(${Boost_LIBRARY_DIRS})
+
 ########################################################################
 # Set QT generation stuff
 ########################################################################
 set(display_moc_hdrs
-    bild.h
     showpngpicture.h
 )
 
 QT4_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
 QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui )
 
-set(display_srcs
+list(APPEND display_sources
     ${display_moc_srcs}
     ${display_ui_hdrs}
-    display_show_image.cc
-    bild.cc
+    show_image_impl.cc
     showpngpicture.cc
 )
-add_library(gnuradio-display SHARED ${display_srcs})
+
+add_library(gnuradio-display SHARED ${display_sources})
 target_link_libraries(gnuradio-display ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${QT_LIBRARIES})
 set_target_properties(gnuradio-display PROPERTIES DEFINE_SYMBOL "gnuradio_display_EXPORTS")
 
@@ -49,14 +54,3 @@ install(TARGETS gnuradio-display
     ARCHIVE DESTINATION lib${LIB_SUFFIX} # .lib file
     RUNTIME DESTINATION bin              # .dll file
 )
-
-########################################################################
-# Build and register unit test
-########################################################################
-find_package(Boost COMPONENTS unit_test_framework)
-
-#include(GrTest)
-#set(GR_TEST_TARGET_DEPS gnuradio-display)
-#turn each test cpp file into an executable with an int main() function
-#add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN)
-
