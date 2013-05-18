@@ -96,7 +96,7 @@ namespace gr {
       return d_main_gui;
     }
     PyObject *
-    show_image::pyqwidget()
+    show_image_impl::pyqwidget()
     {
 
      PyObject *w = PyLong_FromVoidPtr((void*)d_main_gui);
@@ -104,10 +104,10 @@ namespace gr {
      return retarg;
     }
 
-    void show_image_impl::exec_()
-    {
-     d_qApplication->exec();
-    }
+//    void show_image_impl::exec_()
+//    {
+//     d_qApplication->exec();
+//    }
   } /* namespace display */
 } /* namespace gr */
 

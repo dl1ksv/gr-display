@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    display_show_image.xml DESTINATION share/gnuradio/grc/blocks
+    display_show_image.xml
+    display_show_text.xml DESTINATION share/gnuradio/grc/blocks
 )

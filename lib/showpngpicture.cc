@@ -24,11 +24,11 @@ ShowPngPicture::ShowPngPicture(int width,int height,QWidget *parent) :
     line = (QRgb *) p->scanLine(row);
     reverseOrder = false;
 
-    displayTimer = new QTimer(this);
-    connect(displayTimer, SIGNAL(timeout()),this,SLOT(update()));
+//    displayTimer = new QTimer(this);
+//    connect(displayTimer, SIGNAL(timeout()),this,SLOT(update()));
     connect(ui->saveButton,SIGNAL(clicked()),this,SLOT(saveImage2File()));
     connect(ui->reverse,SIGNAL(clicked(bool)),this,SLOT(storeReverse(bool)));
-    displayTimer->start(500);
+//    displayTimer->start(500);
 
 }
 
@@ -77,6 +77,7 @@ void  ShowPngPicture::setNextPixel(int i)
     if(row >=picHeight)
       row= picHeight-1; // Later scroll up
    line = (QRgb *) p->scanLine(row);
+   update();
    }
   }
   else
@@ -89,6 +90,7 @@ void  ShowPngPicture::setNextPixel(int i)
      if(row < 0)
          row=0;
      line = (QRgb *) p->scanLine(row);
+     update();
    }
   }
 }

@@ -28,7 +28,7 @@ private:
     QImage *p;
     QRgb *line;
     QWidget *displayWidget;
-    QTimer *displayTimer;
+//    QTimer *displayTimer;
 
     void setNextPixel(int);
     bool saveImage(QString);

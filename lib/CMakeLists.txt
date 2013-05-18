@@ -30,16 +30,19 @@ link_directories(${Boost_LIBRARY_DIRS})
 ########################################################################
 set(display_moc_hdrs
     showpngpicture.h
+    show_text_window.h
 )
 
 QT4_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
-QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui )
+QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui show_text_window.ui)
 
 list(APPEND display_sources
     ${display_moc_srcs}
     ${display_ui_hdrs}
     show_image_impl.cc
     showpngpicture.cc
+    show_text_impl.cc
+    show_text_window.cc
 )
 
 add_library(gnuradio-display SHARED ${display_sources})
