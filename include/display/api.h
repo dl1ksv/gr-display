@@ -22,7 +22,7 @@
 #ifndef INCLUDED_DISPLAY_API_H
 #define INCLUDED_DISPLAY_API_H
 
-#include <gruel/attributes.h>
+#include <gnuradio/attributes.h>
 
 #ifdef gnuradio_display_EXPORTS
 #  define DISPLAY_API __GR_ATTR_EXPORT

@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "show_text_impl.h"
 #include "show_text_window.h"
 
@@ -39,9 +39,9 @@ namespace gr {
      * The private constructor
      */
     show_text_impl::show_text_impl(QWidget *parent)
-      : gr_sync_block("show_text",
-                      gr_make_io_signature(1, 1, sizeof (char)),
-                      gr_make_io_signature(0,0,0))
+      : gr::sync_block("show_text",
+                      gr::io_signature::make(1, 1, sizeof (char)),
+                      gr::io_signature::make(0,0,0))
                       ,d_parent(parent){
         d_main_gui = NULL;
         if(qApp != NULL) {

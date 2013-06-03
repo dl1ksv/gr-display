@@ -22,7 +22,7 @@
 #define INCLUDED_DISPLAY_SHOW_TEXT_H
 
 #include <display/api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 #include <QWidget>
 #include <Python.h>
 
@@ -36,7 +36,7 @@ namespace gr {
      * \ingroup display
      *
      */
-    class DISPLAY_API show_text : virtual public gr_sync_block
+    class DISPLAY_API show_text : virtual public sync_block
     {
      public:
       typedef boost::shared_ptr<show_text> sptr;

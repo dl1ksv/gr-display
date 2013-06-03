@@ -24,7 +24,6 @@
 #include <display/show_image.h>
 
 #include <Python.h>
-#include <gruel/high_res_timer.h>
 #include <QApplication>
 
 namespace gr {
@@ -36,12 +35,6 @@ namespace gr {
       /* Variables */
 
        QWidget *d_parent;
-
-//       double d_update_time;
-//       gruel::high_res_timer_type d_current_time;
-//       gruel::high_res_timer_type  d_last_time;
-
-
 
        int nx_samples;
        int d_width;

@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "show_image_impl.h"
 #include "showpngpicture.h"
 
@@ -40,9 +40,9 @@ namespace gr {
      * The private constructor
      */
     show_image_impl::show_image_impl(int imagewidth,int imageheight,QWidget *parent)
-      : gr_sync_block ("show_image",
-                       gr_make_io_signature(2, 2, sizeof (char)),
-                               gr_make_io_signature(0, 0, 0)),
+      : gr::sync_block ("show_image",
+                       gr::io_signature::make(2, 2, sizeof (char)),
+                       gr::io_signature::make(0, 0, 0)),
                        d_width(imagewidth),d_height(imageheight),d_parent(parent)
      {
          d_main_gui = NULL;

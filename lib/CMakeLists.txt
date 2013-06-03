@@ -46,7 +46,7 @@ list(APPEND display_sources
 )
 
 add_library(gnuradio-display SHARED ${display_sources})
-target_link_libraries(gnuradio-display ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${QT_LIBRARIES})
+target_link_libraries(gnuradio-display ${Boost_LIBRARIES}  ${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES})
 set_target_properties(gnuradio-display PROPERTIES DEFINE_SYMBOL "gnuradio_display_EXPORTS")
 
 ########################################################################
