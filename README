@@ -14,7 +14,7 @@ Instrumentation - Qt in grc.
 
 1. Dependencies:
 
-- gnuradio
+- gnuradio (3.7)
 - gr-qtgui
 - qt4 ( tested with qt4.8 )
 
@@ -23,7 +23,7 @@ Instrumentation - Qt in grc.
 
 get the latest code from https://github.com/dl1ksv/gr-display
 
-The build process is cmake based. So change to code directory.
+The build process is cmake based. So change to the code directory.
 There
 $mkdir build
 $cd build
@@ -32,7 +32,7 @@ $make
 $su
 $make install
 
-After that you'll find in grc in QT GUI WIDGETS a PNG Image sink.
+After that you'll find in grc in Instrumentation / Qt a PNG Image sink and a Text sink.
 
 
 3. To do
