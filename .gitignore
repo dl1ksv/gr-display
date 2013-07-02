@@ -1,5 +1,4 @@
-build/
-build-3.6/
+build*/
 Makefile
 *.o
 moc_*
