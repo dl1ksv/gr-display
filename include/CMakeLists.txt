@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     display_api.h
+    show_text.h
     display_show_image.h DESTINATION include/display
 )

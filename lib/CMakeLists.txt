@@ -25,10 +25,11 @@ include(GrPlatform) #define LIB_SUFFIX
 set(display_moc_hdrs
     bild.h
     showpngpicture.h
+    show_text_window.h
 )
 
 QT4_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
-QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui )
+QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui show_text_window.ui)
 
 set(display_srcs
     ${display_moc_srcs}
@@ -36,6 +37,8 @@ set(display_srcs
     display_show_image.cc
     bild.cc
     showpngpicture.cc
+    show_text_impl.cc
+    show_text_window.cc
 )
 add_library(gnuradio-display SHARED ${display_srcs})
 target_link_libraries(gnuradio-display ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${QT_LIBRARIES})

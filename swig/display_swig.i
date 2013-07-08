@@ -10,7 +10,11 @@
 
 %{
 #include "display_show_image.h"
+#include "show_text.h"
 %}
+
+%include "show_text.h"
+GR_SWIG_BLOCK_MAGIC2(display, show_text);
 
 GR_SWIG_BLOCK_MAGIC(display,show_image)
 
