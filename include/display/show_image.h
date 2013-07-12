@@ -22,10 +22,11 @@
 #ifndef INCLUDED_DISPLAY_SHOW_IMAGE_H
 #define INCLUDED_DISPLAY_SHOW_IMAGE_H
 
+#include <Python.h>
 #include <display/api.h>
 #include <gnuradio/sync_block.h>
 #include <QWidget>
-#include <Python.h>
+
 
 class QApplication;
 class ShowPngPicture;

@@ -21,10 +21,11 @@
 #ifndef INCLUDED_DISPLAY_SHOW_TEXT_H
 #define INCLUDED_DISPLAY_SHOW_TEXT_H
 
+#include <Python.h>
 #include <display/api.h>
 #include <gnuradio/sync_block.h>
 #include <QWidget>
-#include <Python.h>
+
 
 //class QApplication;
 

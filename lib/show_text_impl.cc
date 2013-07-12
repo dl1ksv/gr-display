@@ -22,10 +22,10 @@
 #include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
+
 #include "show_text_impl.h"
 #include "show_text_window.h"
-
+#include <gnuradio/io_signature.h>
 namespace gr {
   namespace display {
 
