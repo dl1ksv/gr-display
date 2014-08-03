@@ -21,6 +21,7 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
+include(GrPython)
 
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
@@ -46,7 +47,8 @@ list(APPEND display_sources
 )
 
 add_library(gnuradio-display SHARED ${display_sources})
-target_link_libraries(gnuradio-display ${Boost_LIBRARIES}  ${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES})
+target_link_libraries(gnuradio-display ${Boost_LIBRARIES}
+	${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES} ${PYTHON_LIBRARIES})
 set_target_properties(gnuradio-display PROPERTIES DEFINE_SYMBOL "gnuradio_display_EXPORTS")
 
 ########################################################################
