@@ -46,10 +46,22 @@ list(APPEND display_sources
     show_text_window.cc
 )
 
+set(display_sources "${display_sources}" PARENT_SCOPE)
+if(NOT display_sources)
+	MESSAGE(STATUS "No C++ sources... skipping lib/")
+	return()
+endif(NOT display_sources)
+
 add_library(gnuradio-display SHARED ${display_sources})
 target_link_libraries(gnuradio-display ${Boost_LIBRARIES}
 	${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES} ${PYTHON_LIBRARIES})
 set_target_properties(gnuradio-display PROPERTIES DEFINE_SYMBOL "gnuradio_display_EXPORTS")
+
+if(APPLE)
+    set_target_properties(gnuradio-display PROPERTIES
+        INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+    )
+endif(APPLE)
 
 ########################################################################
 # Install built library files
