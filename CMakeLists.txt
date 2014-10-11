@@ -99,6 +99,8 @@ find_package(SWIG)
 include(GrPython)
 GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
 
+find_package(Doxygen)
+
 ########################################################################
 # Setup the include and linker paths
 ########################################################################
