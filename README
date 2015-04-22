@@ -32,6 +32,11 @@ $make
 $su
 $make install
 
+++++ If you are unsure about <where gnuradio is installed> run
+
+gnuradio-config-info --prefix
+
+
 After that you'll find in grc in Instrumentation / Qt a PNG Image sink and a Text sink.
 
 
