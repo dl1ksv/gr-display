@@ -56,13 +56,15 @@ add_library(gnuradio-display SHARED ${display_sources})
 target_link_libraries(gnuradio-display ${Boost_LIBRARIES}
 	${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES} ${PYTHON_LIBRARIES})
 set_target_properties(gnuradio-display PROPERTIES DEFINE_SYMBOL "gnuradio_display_EXPORTS")
-set_target_properties(gnuradio-display PROPERTIES SOVERSION 0)
 set_target_properties(gnuradio-display PROPERTIES VERSION 0.0.0)
 
 if(APPLE)
     set_target_properties(gnuradio-display PROPERTIES
         INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
     )
+    set_target_properties(gnuradio-display PROPERTIES SOVERSION 0)
+else(APPLE)
+    set_target_properties(gnuradio-display PROPERTIES SOVERSION ${LIBVER})
 endif(APPLE)
 
 ########################################################################

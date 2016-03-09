@@ -45,33 +45,15 @@ After that you'll find in grc in Instrumentation / Qt a PNG Image sink and a Tex
 - Perhaps do some simple image processing like rotating before saving.
 
 
-4. Using the example
+4. Using the example 
 
-The example is based on the assumtion that the input device is named FCD. This can be achieved
-by the following lines in the .asoundrc file in the home directory:
+The example shows the usage of the show_image block and requires the gr-fcdproplus block.
+You have to run the decodeapt block and install it in your grc, first.
+You'll find this afterwards in the 'custom' section.
 
-pcm.V10_card {
-        type hw
-        card V10
-}
-ctl.V10_card {
-        type hw
-        card V10
-        }
-        
-pcm.FCD {
-        type plug
-        slave.pcm V10_card
-}
+An example for the usage of the show_text block can be found in the gr-ax25 block.
 
-
-5. Known Problems
-
-You should use libusb-1.0.8. Other versions of libusb or libusbx lead to a sudden finish of the example.
-A bug is reported, but up to now there is no fix available.
-
-
-6. Credits
+5. Credits
 
 The apt decoder part is based on an decoder prototype by  Alexandru Csete, OZ9AEC.
 

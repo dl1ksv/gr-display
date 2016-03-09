@@ -1,4 +1,4 @@
-# Copyright 2011,2012 Free Software Foundation, Inc.
+# Copyright 2011,2012-2016 Free Software Foundation, Inc.
 #
 # This file is part of GNU Radio
 #
@@ -19,9 +19,20 @@
 
 
 ########################################################################
+#
 # Project setup
+#
 ########################################################################
-cmake_minimum_required(VERSION 2.6)
+
+cmake_minimum_required(VERSION 3.0)
+
+########################################################################
+#
+# First look in the install directory for package config of gnuradio
+#
+########################################################################
+set( ENV{PKG_CONFIG_PATH} "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}")
+
 project(gr-display CXX C)
 enable_testing()
 
@@ -64,6 +75,41 @@ if(NOT Boost_FOUND)
 endif()
 
 ########################################################################
+# Find gnuradio build dependencies
+########################################################################
+set(GR_REQUIRED_COMPONENTS RUNTIME)
+
+########################################################################
+# Make sure to find the appropriate gnuradio installition if more than
+# one installation of gnuradio exists
+########################################################################
+find_package(Gnuradio "3.7" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} NO_DEFAULT_PATH)
+
+
+if(NOT GNURADIO_RUNTIME_FOUND)
+    message(FATAL_ERROR "GnuRadio Runtime required to compile display")
+endif()
+########################################################################
+#
+# set search path for cmake modules to OOT, Gnuradio
+#
+########################################################################
+set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_INSTALL_PREFIX}/lib/cmake/gnuradio")
+
+########################################################################
+#
+# setup version info
+#
+########################################################################
+
+set(VERSION_INFO_MAJOR_VERSION 3)
+set(VERSION_INFO_API_COMPAT    7)
+set(VERSION_INFO_MINOR_VERSION 2)
+set(VERSION_INFO_MAINT_VERSION 0)
+include(GrVersion) #setup version info
+
+########################################################################
 # Install directories
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
@@ -80,16 +126,6 @@ set(GR_LIBEXEC_DIR      libexec)
 set(GR_PKG_LIBEXEC_DIR  ${GR_LIBEXEC_DIR}/${CMAKE_PROJECT_NAME})
 set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 
-########################################################################
-# Find gnuradio build dependencies
-########################################################################
-set(GR_REQUIRED_COMPONENTS RUNTIME)
-find_package(Gnuradio "3.7")
-
-
-if(NOT GNURADIO_RUNTIME_FOUND)
-    message(FATAL_ERROR "GnuRadio Runtime required to compile display")
-endif()
 
 find_package(Qt4 REQUIRED )
 include(${QT_USE_FILE})
@@ -144,3 +180,32 @@ add_subdirectory(python)
 add_subdirectory(grc)
 add_subdirectory(apps)
 add_subdirectory(docs)
+########################################################################
+# Create Pkg Config File
+########################################################################
+# fake gnuradio cpack behavior as long as we don't use it directly
+set(CPACK_PACKAGE_NAME "gnuradio-display")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GNU Radio block to display text and png
+images")
+set(CPACK_PACKAGE_VERSION ${VERSION})
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/gnuradio-display.pc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/gnuradio-display.pc
+@ONLY)
+
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/gnuradio-display.pc
+    DESTINATION ${GR_LIBRARY_DIR}/pkgconfig
+    COMPONENT "display"
+)
+########################################################################
+# Print Summary
+########################################################################
+MESSAGE(STATUS "================ Build Summary =========================")
+MESSAGE(STATUS "Building gr-display    :${VERSION} / ${LIBVER} for ${CMAKE_SYSTEM_NAME} ")
+MESSAGE(STATUS "Using CMAKE Module path: ${CMAKE_MODULE_PATH}" )
+MESSAGE(STATUS "GNURADIO INCLUDES IN   : ${GNURADIO_RUNTIME_INCLUDE_DIRS}")
+MESSAGE(STATUS "Using install prefix   : ${CMAKE_INSTALL_PREFIX}")
+MESSAGE(STATUS "========================================================")
+

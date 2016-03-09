@@ -1,7 +1,7 @@
 build*/
-example/
 Makefile
 *.o
 moc_*
 qrc_*
 ui_*
+examples/*.py
