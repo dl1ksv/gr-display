@@ -85,17 +85,36 @@ set(GR_REQUIRED_COMPONENTS RUNTIME)
 ########################################################################
 find_package(Gnuradio "3.7" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} NO_DEFAULT_PATH)
 
-
 if(NOT GNURADIO_RUNTIME_FOUND)
     message(FATAL_ERROR "GnuRadio Runtime required to compile display")
 endif()
+find_package(Qt4 REQUIRED )
+include(${QT_USE_FILE})
+find_package(PythonLibs)
+find_package(SWIG)
+
+if(NOT SWIG_FOUND)
+    message(FATAL_ERROR "Swig required to build gr-display")
+endif()
+
+find_package(Doxygen)
+
 ########################################################################
 #
 # set search path for cmake modules to OOT, Gnuradio
 #
 ########################################################################
 set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_INSTALL_PREFIX}/lib/cmake/gnuradio")
+include(FindGnuradioModules)
+
+if(${GNURADIO_MODULE_DIRECTORY} STREQUAL "GNURADIO_MODULE_DIRECTORY-NOTFOUND")
+    message(FATAL_ERROR "Cannot find gnuradio cmake Modules directory")
+else()
+    message(STATUS "Modules found in ${GNURADIO_MODULE_DIRECTORY}")
+endif() 
+list(APPEND CMAKE_MODULE_PATH "${GNURADIO_MODULE_DIRECTORY}" )
+include(GrPython)
+GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
 
 ########################################################################
 #
@@ -145,28 +164,6 @@ if(APPLE)
            BOOL "Do Build Using Library Install RPath" FORCE)
    endif(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
 endif(APPLE)
-
-########################################################################
-# Find gnuradio build dependencies
-########################################################################
-set(GR_REQUIRED_COMPONENTS RUNTIME)
-find_package(Gnuradio "3.7")
-
-
-if(NOT GNURADIO_RUNTIME_FOUND)
-    message(FATAL_ERROR "GnuRadio Runtime required to compile display")
-endif()
-
-find_package(Qt4 REQUIRED )
-include(${QT_USE_FILE})
-find_package(PythonLibs)
-find_package(SWIG)
-
-include(GrPython)
-GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
-
-find_package(Doxygen)
-
 ########################################################################
 # Setup the include and linker paths
 ########################################################################
@@ -215,8 +212,7 @@ add_subdirectory(docs)
 ########################################################################
 # fake gnuradio cpack behavior as long as we don't use it directly
 set(CPACK_PACKAGE_NAME "gnuradio-display")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GNU Radio block to display text and png
-images")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GNU Radio block to display text and png images")
 set(CPACK_PACKAGE_VERSION ${VERSION})
 
 configure_file(
@@ -233,7 +229,8 @@ install(
 # Print Summary
 ########################################################################
 MESSAGE(STATUS "================ Build Summary =========================")
-MESSAGE(STATUS "Building gr-display    :${VERSION} / ${LIBVER} for ${CMAKE_SYSTEM_NAME} ")
+MESSAGE(STATUS "Building gr-display    : ${LIBVER} for ${CMAKE_SYSTEM_NAME} ")
+MESSAGE(STATUS "Building for gnuradio  : ${Gnuradio_VERSION}")
 MESSAGE(STATUS "Using CMAKE Module path: ${CMAKE_MODULE_PATH}" )
 MESSAGE(STATUS "GNURADIO INCLUDES IN   : ${GNURADIO_RUNTIME_INCLUDE_DIRS}")
 MESSAGE(STATUS "Using install prefix   : ${CMAKE_INSTALL_PREFIX}")
