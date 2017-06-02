@@ -25,7 +25,7 @@
 ########################################################################
 
 cmake_minimum_required(VERSION 3.0)
-
+set(Gnuradio_DIR /usr/lib/x86_64-linux-gnu/cmake/gnuradio/)
 ########################################################################
 #
 # First look in the install directory for package config of gnuradio
