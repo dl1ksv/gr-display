@@ -90,7 +90,7 @@ if(NOT GNURADIO_RUNTIME_FOUND)
 endif()
 find_package(Qt4 REQUIRED )
 include(${QT_USE_FILE})
-find_package(PythonLibs)
+find_package(PythonLibs 2)
 find_package(SWIG)
 
 if(NOT SWIG_FOUND)
