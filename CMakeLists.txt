@@ -25,7 +25,20 @@
 ########################################################################
 
 cmake_minimum_required(VERSION 3.0)
+########################################################################
+#
+# set search path for cmake modules to OOT, Gnuradio
+#
+########################################################################
+set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
+include(FindGnuradioModules)
 
+if(${GNURADIO_MODULE_DIRECTORY} STREQUAL "GNURADIO_MODULE_DIRECTORY-NOTFOUND")
+    message(FATAL_ERROR "Cannot find gnuradio cmake Modules directory")
+else()
+    message(STATUS "Modules found in ${GNURADIO_MODULE_DIRECTORY}")
+endif() 
+list(APPEND CMAKE_MODULE_PATH "${GNURADIO_MODULE_DIRECTORY}" )
 ########################################################################
 #
 # First look in the install directory for package config of gnuradio
@@ -83,7 +96,7 @@ set(GR_REQUIRED_COMPONENTS RUNTIME)
 # Make sure to find the appropriate gnuradio installition if more than
 # one installation of gnuradio exists
 ########################################################################
-find_package(Gnuradio "3.7" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} NO_DEFAULT_PATH)
+find_package(Gnuradio "3.7" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} ${GNURADIO_MODULE_DIRECTORY})
 
 if(NOT GNURADIO_RUNTIME_FOUND)
     message(FATAL_ERROR "GnuRadio Runtime required to compile display")
@@ -99,20 +112,7 @@ endif()
 
 find_package(Doxygen)
 
-########################################################################
-#
-# set search path for cmake modules to OOT, Gnuradio
-#
-########################################################################
-set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
-include(FindGnuradioModules)
 
-if(${GNURADIO_MODULE_DIRECTORY} STREQUAL "GNURADIO_MODULE_DIRECTORY-NOTFOUND")
-    message(FATAL_ERROR "Cannot find gnuradio cmake Modules directory")
-else()
-    message(STATUS "Modules found in ${GNURADIO_MODULE_DIRECTORY}")
-endif() 
-list(APPEND CMAKE_MODULE_PATH "${GNURADIO_MODULE_DIRECTORY}" )
 include(GrPython)
 GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
 
