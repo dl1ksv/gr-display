@@ -96,14 +96,17 @@ set(GR_REQUIRED_COMPONENTS RUNTIME)
 # Make sure to find the appropriate gnuradio installition if more than
 # one installation of gnuradio exists
 ########################################################################
-find_package(Gnuradio "3.7" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} ${GNURADIO_MODULE_DIRECTORY})
+find_package(Gnuradio "3.8" REQUIRED PATHS ${CMAKE_INSTALL_PREFIX} ${GNURADIO_MODULE_DIRECTORY})
 
 if(NOT GNURADIO_RUNTIME_FOUND)
     message(FATAL_ERROR "GnuRadio Runtime required to compile display")
 endif()
-find_package(Qt4 REQUIRED )
-include(${QT_USE_FILE})
-find_package(PythonLibs 2)
+find_package(Qt5Widgets REQUIRED )
+set(QT_FOUND ${Qt5Widgets_FOUND})
+set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES})
+set(QT_INCLUDE_DIRS ${Qt5Widgets_INCLUDE_DIRS})
+
+find_package(PythonLibs 3)
 find_package(SWIG)
 
 if(NOT SWIG_FOUND)
@@ -114,7 +117,7 @@ find_package(Doxygen)
 
 
 include(GrPython)
-GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
+GR_PYTHON_CHECK_MODULE("PyQt5" PyQt5 True PYQT5_FOUND)
 
 ########################################################################
 #
@@ -123,8 +126,8 @@ GR_PYTHON_CHECK_MODULE("PyQt4" PyQt4 True PYQT4_FOUND)
 ########################################################################
 
 set(VERSION_INFO_MAJOR_VERSION 3)
-set(VERSION_INFO_API_COMPAT    7)
-set(VERSION_INFO_MINOR_VERSION 2)
+set(VERSION_INFO_API_COMPAT    8)
+set(VERSION_INFO_MINOR_VERSION 0)
 set(VERSION_INFO_MAINT_VERSION 0)
 include(GrVersion) #setup version info
 
@@ -136,7 +139,7 @@ set(GR_RUNTIME_DIR      bin)
 set(GR_LIBRARY_DIR      lib${LIB_SUFFIX})
 set(GR_INCLUDE_DIR      include/display)
 set(GR_DATA_DIR         share)
-set(GR_PKG_DATA_DIR     ${GR_DATA_DIR}/${CMAKE_PROJECT_NAME})
+set(GR_PKG_DATA_DIR     ${CMAKE_INSTALL_PREFIX}/${GR_DATA_DIR}/gnuradio)
 set(GR_DOC_DIR          ${GR_DATA_DIR}/doc)
 set(GR_PKG_DOC_DIR      ${GR_DOC_DIR}/${CMAKE_PROJECT_NAME})
 set(GR_CONF_DIR         etc)
@@ -234,5 +237,6 @@ MESSAGE(STATUS "Building for gnuradio  : ${Gnuradio_VERSION}")
 MESSAGE(STATUS "Using CMAKE Module path: ${CMAKE_MODULE_PATH}" )
 MESSAGE(STATUS "GNURADIO INCLUDES IN   : ${GNURADIO_RUNTIME_INCLUDE_DIRS}")
 MESSAGE(STATUS "Using install prefix   : ${CMAKE_INSTALL_PREFIX}")
+MESSAGE(STATUS "Installing grc files to : ${GRC_BLOCKS_DIR}")
 MESSAGE(STATUS "========================================================")
 

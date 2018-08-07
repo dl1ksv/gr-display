@@ -37,7 +37,7 @@ namespace gr {
 
      public:
       show_text_impl(QWidget *parent);
-      ~show_text_impl();
+      ~show_text_impl(); 
       PyObject* pyqwidget();
 
       // Where all the action really happens
