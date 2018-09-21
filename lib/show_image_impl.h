@@ -46,7 +46,7 @@ namespace gr {
      public:
       show_image_impl(int imagewidth,int imageheight,QWidget *parent=NULL);
       ~show_image_impl();
-//      void exec_();
+
       QWidget*  qwidget();
       PyObject* pyqwidget();
       QApplication *d_qApplication;

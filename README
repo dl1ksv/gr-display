@@ -12,14 +12,14 @@ You'll find them in
 Instrumentation - Qt in grc.
 
 
-1. Dependencies:
+1.     Dependencies:
 
-- gnuradio (3.7)
+- gnuradio (3.8)
 - gr-qtgui
-- qt4 ( tested with qt4.8 )
+- qt5 
 
 
-2. Installation
+2.     Installation
 
 get the latest code from https://github.com/dl1ksv/gr-display
 
@@ -40,12 +40,12 @@ gnuradio-config-info --prefix
 After that you'll find in grc in Instrumentation / Qt a PNG Image sink and a Text sink.
 
 
-3. To do
+3.    To do
 
 - Perhaps do some simple image processing like rotating before saving.
 
 
-4. Using the example 
+4.    Using the example 
 
 The example shows the usage of the show_image block and requires the gr-fcdproplus block.
 You have to run the decodeapt block and install it in your grc, first.
@@ -53,7 +53,7 @@ You'll find this afterwards in the 'custom' section.
 
 An example for the usage of the show_text block can be found in the gr-ax25 block.
 
-5. Credits
+5.    Credits
 
 The apt decoder part is based on an decoder prototype by  Alexandru Csete, OZ9AEC.
 

@@ -35,8 +35,8 @@ set(display_moc_hdrs
     show_text_window.h
 )
 
-QT4_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
-QT4_WRAP_UI(display_ui_hdrs showpngpicture.ui show_text_window.ui)
+QT5_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
+QT5_WRAP_UI(display_ui_hdrs showpngpicture.ui show_text_window.ui)
 
 list(APPEND display_sources
     ${display_moc_srcs}

@@ -11,9 +11,9 @@ author:
 copyright_owner:
   - Volker Schroer
 dependencies:
-  - gnuradio
+  - gnuradio (>= 3.8.0)
   - gr-qtgui
-  - qt4
+  - qt5
 repo: https://github.com/dl1ksv/gr-display.git
 ---
 gr-display is a small qt based addon for gnuradio.
@@ -25,6 +25,6 @@ show_text    - to display ascii characters as text in a qt window.
 I use show_image to receive and display some weather- satellite pictures with the funcube dongle
 and gnuradio.
 
-Both blocks are using the new post 3.7- api.
 You'll find them in
-Instrumentation - Qt in grc.
+Custom - Display in grc.
+

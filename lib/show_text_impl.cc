@@ -26,6 +26,10 @@
 #include "show_text_impl.h"
 #include "show_text_window.h"
 #include <gnuradio/io_signature.h>
+
+
+#include <iostream>
+
 namespace gr {
   namespace display {
 
@@ -48,11 +52,14 @@ namespace gr {
           d_qApplication = qApp;
          }
         else {
-          int argc=0;
-          char **argv = NULL;
-          d_qApplication = new QApplication(argc, argv);
+          int argc=1;
+          char *argv =new char;
+          argv[0] = '\0';
+
+          d_qApplication = new QApplication(argc, &argv);
         }
         d_main_gui = new show_text_window(d_parent);
+
     }
 
     /*
@@ -60,6 +67,7 @@ namespace gr {
      */
     show_text_impl::~show_text_impl()
     {
+       d_main_gui->close();
     }
 
     int
@@ -74,6 +82,7 @@ namespace gr {
         // Tell runtime system how many output items we produced.
         return noutput_items;
     }
+
     PyObject *
     show_text_impl::pyqwidget()
     {

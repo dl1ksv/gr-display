@@ -45,7 +45,7 @@ void show_text_window::set_text(const char *c, int count)
 {
   if(count == 0)
     return;
-  QString s=ui->textDisplay->text()+QString::fromAscii(c,count);
+  QString s=ui->textDisplay->text()+QString::fromLatin1(c,count);
   ui->textDisplay->setText(s);
   update();
 }
@@ -56,7 +56,7 @@ void show_text_window::text2File()
     bool ok;
     dir=QDir::homePath();
 
-    fileName = QFileDialog::getSaveFileName ( 0, tr ( "Save Image" ),dir , "*.txt" );
+    fileName = QFileDialog::getSaveFileName ( 0, tr ( "Save Text" ),dir , "*.txt" );
     if ( !fileName.isEmpty() ) {
         QFile file( fileName );
         if ( file.open(QIODevice::WriteOnly) )
