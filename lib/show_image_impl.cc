@@ -50,9 +50,10 @@ namespace gr {
              d_qApplication = qApp;
          }
          else {
-             int argc=0;
-             char **argv = NULL;
-             d_qApplication = new QApplication(argc, argv);
+          int argc=1;
+          char *argv =new char;
+          argv[0] = '\0';
+          d_qApplication = new QApplication(argc, &argv);
          }
          d_main_gui = new ShowPngPicture(d_width,d_height,d_parent);
          d_triggered=false;
@@ -77,7 +78,7 @@ namespace gr {
        d_main_gui->setPixel(in,noutput_items);
       }
       else {
-          int i;
+          int i = 0;
           while (i < noutput_items && ctrl[i] == 0) {
               i++;
           }
@@ -104,10 +105,6 @@ namespace gr {
      return retarg;
     }
 
-//    void show_image_impl::exec_()
-//    {
-//     d_qApplication->exec();
-//    }
   } /* namespace display */
 } /* namespace gr */
 
