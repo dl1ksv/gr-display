@@ -91,6 +91,11 @@ namespace gr {
     return noutput_items;
     }
 
+    void show_image_impl::displayBottomUp(bool direction)
+    {
+      d_main_gui->presetBottomUp(direction);
+    }
+
     QWidget *
     show_image_impl::qwidget()
     {

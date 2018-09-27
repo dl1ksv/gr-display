@@ -14,6 +14,13 @@ parameters:
     dtype: int
     default: 1400
 
+-   id: displaybottomup
+    label: Display bottom up
+    dtype: enum
+    default: 'False'
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
+
 -   id: gui_hint
     label: GUI Hint
     dtype: gui_hint
@@ -41,6 +48,7 @@ templates:
               win = 'self._%s_win'%id
            %>\
            display.show_image( ${imagewidth}, ${imageheight}  )
+           self.${id}.displayBottomUp(${displaybottomup})
            self._${id}_win = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
            ${gui_hint() % win}
 

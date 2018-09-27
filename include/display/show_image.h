@@ -54,6 +54,7 @@ namespace gr {
        */
       static sptr make(int imagewidth,int imageheight,QWidget *parent=NULL);
       virtual PyObject* pyqwidget()=0;
+      virtual void displayBottomUp(bool direction) = 0;
     };
 
   } // namespace display

@@ -27,8 +27,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>425</width>
-        <height>328</height>
+        <width>427</width>
+        <height>326</height>
        </rect>
       </property>
      </widget>
@@ -39,7 +39,7 @@
      <item>
       <widget class="QRadioButton" name="reverse">
        <property name="text">
-        <string>Display invers</string>
+        <string>Display from bottom up</string>
        </property>
       </widget>
      </item>

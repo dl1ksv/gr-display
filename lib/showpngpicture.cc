@@ -122,3 +122,10 @@ void ShowPngPicture::storeReverse(bool order)
  }
  line = (QRgb *) p->scanLine(row);
 }
+
+
+void ShowPngPicture::presetBottomUp(bool order)
+{
+  ui->reverse->setChecked(order);
+  storeReverse(order);
+}

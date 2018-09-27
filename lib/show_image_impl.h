@@ -47,6 +47,8 @@ namespace gr {
       show_image_impl(int imagewidth,int imageheight,QWidget *parent=NULL);
       ~show_image_impl();
 
+      void displayBottomUp(bool direction);
+
       QWidget*  qwidget();
       PyObject* pyqwidget();
       QApplication *d_qApplication;

@@ -17,6 +17,8 @@ class ShowPngPicture : public QWidget
 public:
     explicit ShowPngPicture(int width,int height,QWidget *parent = 0);
     ~ShowPngPicture();
+
+    void presetBottomUp(bool order);
 private:
     Ui::ShowPngPicture *ui;
     int picWidth;
@@ -32,6 +34,7 @@ private:
 
     void setNextPixel(int);
     bool saveImage(QString);
+    
 
 
 public slots:
