@@ -25,7 +25,6 @@ parameters:
     label: GUI Hint
     dtype: gui_hint
     hide: part
-    value: ${ value }
 
 inputs:
 -   domain: stream
