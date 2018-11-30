@@ -1,0 +1,63 @@
+id: show_syncedimage
+label: Synced Image Sink
+category: '[Custom]/Display'
+
+parameters:
+-   id: title
+    label: Title
+    dtype: string
+    default: ""
+    
+-   id: imagewidth
+    label: Image width
+    dtype: int
+    default: 2080
+
+-   id: imageheight
+    label: Image height
+    dtype: int
+    default: 1400
+
+-   id: displaybottomup
+    label: Display bottom up
+    dtype: enum
+    default: 'False'
+    options: ['True', 'False']
+    option_labels: ['Yes', 'No']
+
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   domain: stream
+    label: in
+    dtype:  float
+
+
+templates:
+    imports: |-
+            from PyQt5 import Qt
+            from gnuradio import qtgui
+            import display
+            import sip
+
+    make: |-
+           <%
+              win = 'self._%s_win'%id
+           %>\
+           display.show_syncedimage( ${title}, ${imagewidth}, ${imageheight}  )
+           self.${id}.displayBottomUp(${displaybottomup})
+           self._${id}_win = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
+           ${gui_hint() % win}
+           
+documentation: |-
+
+ Displays a float input stream as gray scaled picture. Displaying is started if a SyncA tag is detected. Each line is scaled between min and max.
+ The GUI hint can be used to position the widget within the application. The hint is of the form [tab_id@tab_index]: [row, col, row_span, col_span]. Both the tab specification and the grid position are optional.
+           
+
+file_format: 1
+
+
