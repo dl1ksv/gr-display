@@ -24,8 +24,6 @@ include(GrPlatform) #define LIB_SUFFIX
 include(GrMiscUtils)
 include(GrPython)
 
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
 
 ########################################################################
 # Set QT generation stuff
@@ -48,15 +46,17 @@ list(APPEND display_sources
 )
 
 set(display_sources "${display_sources}" PARENT_SCOPE)
-if(NOT display_sources)
-	MESSAGE(STATUS "No C++ sources... skipping lib/")
-	return()
-endif(NOT display_sources)
 
 add_library(gnuradio-display SHARED ${display_sources})
-target_link_libraries(gnuradio-display ${Boost_LIBRARIES}
-	${GNURADIO_RUNTIME_LIBRARIES} ${QT_LIBRARIES} ${PYTHON_LIBRARIES})
-
+target_link_libraries(gnuradio-display PUBLIC
+	gnuradio::gnuradio-runtime ${QT_LIBRARIES} Python::Python)
+target_include_directories(gnuradio-display
+        PUBLIC
+        $<INSTALL_INTERFACE:include>
+       	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+	PRIVATE
+	${CMAKE_CURRENT_BINARY_DIR}
+       )
 if(APPLE)
     set_target_properties(gnuradio-display PROPERTIES
         INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
