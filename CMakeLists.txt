@@ -51,11 +51,10 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 #
 ########################################################################
 
-set(VERSION_INFO_MAJOR_VERSION 3)
-set(VERSION_INFO_API_COMPAT    8)
-set(VERSION_INFO_MINOR_VERSION 0)
-set(VERSION_INFO_MAINT_VERSION 0)
-
+set(VERSION_MAJOR 3)
+set(VERSION_API 8)
+SET(VERSION_ABI   0)
+SET(VERSION_PATCH 0)
 cmake_policy(SET CMP0011 NEW)
 ########################################################################
 # Compiler specific setup
@@ -84,8 +83,6 @@ set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES})
 set(QT_INCLUDE_DIRS ${Qt5Widgets_INCLUDE_DIRS})
 
 find_package(PythonLibs 3)
-
-
 
 include(GrPython)
 GR_PYTHON_CHECK_MODULE("PyQt5" PyQt5 True PYQT5_FOUND)
@@ -130,14 +127,11 @@ if(APPLE)
            BOOL "Do Build Using Library Install RPath" FORCE)
    endif(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
 endif(APPLE)
-########################################################################
-# Find gnuradio build dependencies
-########################################################################
-find_package(Doxygen)
 
 ########################################################################
 # Setup doxygen option
 ########################################################################
+find_package(Doxygen)
 if(DOXYGEN_FOUND)
         option(ENABLE_DOXYGEN "Build docs using Doxygen" ON)
 else(DOXYGEN_FOUND)
