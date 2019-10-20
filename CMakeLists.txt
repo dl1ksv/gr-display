@@ -73,7 +73,7 @@ endif()
 ########################################################################
 # Find gnuradio build dependencies
 ########################################################################
-find_package(Gnuradio "3.8" REQUIRED runtime PATHS ${CMAKE_INSTALL_PREFIX} )
+find_package(Gnuradio "3.9" REQUIRED runtime PATHS ${CMAKE_INSTALL_PREFIX} )
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
 include(GrVersion)
@@ -137,7 +137,6 @@ if(DOXYGEN_FOUND)
 else(DOXYGEN_FOUND)
         option(ENABLE_DOXYGEN "Build docs using Doxygen" OFF)
 endif(DOXYGEN_FOUND)
-
 
 ########################################################################
 # Create uninstall target
