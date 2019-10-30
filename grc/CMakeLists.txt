@@ -20,5 +20,5 @@
 install(FILES
     display_show_image.block.yml
     display_show_text.block.yml
-    DESTINATION "${GRC_BLOCKS_DIR}"
+    display_lcd_display.block.yml DESTINATION "${GRC_BLOCKS_DIR}"
 )

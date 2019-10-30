@@ -10,6 +10,7 @@
 %{
 #include "display/show_image.h"
 #include "display/show_text.h"
+#include "display/lcd_display.h"
 %}
 
 
@@ -17,3 +18,5 @@
 GR_SWIG_BLOCK_MAGIC2(display, show_image);
 %include "display/show_text.h"
 GR_SWIG_BLOCK_MAGIC2(display, show_text);
+%include "display/lcd_display.h"
+GR_SWIG_BLOCK_MAGIC2(display, lcd_display);

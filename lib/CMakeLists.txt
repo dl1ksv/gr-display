@@ -31,6 +31,7 @@ include(GrPython)
 set(display_moc_hdrs
     showpngpicture.h
     show_text_window.h
+    freqctrl.h
 )
 
 QT5_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
@@ -43,6 +44,8 @@ list(APPEND display_sources
     showpngpicture.cc
     show_text_impl.cc
     show_text_window.cc
+    freqctrl.cpp
+    lcd_display_impl.cc
 )
 
 set(display_sources "${display_sources}" PARENT_SCOPE)

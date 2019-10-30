@@ -23,5 +23,7 @@
 install(FILES
     api.h
     show_image.h
-    show_text.h DESTINATION include/display
+    show_text.h
+    lcd_display.h
+    DESTINATION include/display
 )
