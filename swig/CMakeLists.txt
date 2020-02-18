@@ -21,9 +21,14 @@
 # Include swig generation macros
 ########################################################################
 find_package(SWIG)
+if (NOT SWIG_FOUND )
+    MESSAGE( STATUS "Swig not found")
+    MESSAGE( FATAL_ERROR "You need swig to build gr-display")
+endif()
 find_package(PythonLibs)
-if(NOT SWIG_FOUND OR NOT PYTHONLIBS_FOUND)
-    return()
+if(NOT PYTHONLIBS_FOUND)
+    MESSAGE( STATUS "Pythonlibs not found")
+    MESSAGE( FATAL_ERROR "You need Pythonlibs to build gr-display")
 endif()
 include(GrSwig)
 include(GrPython)
