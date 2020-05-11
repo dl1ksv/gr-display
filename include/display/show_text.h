@@ -40,7 +40,7 @@ namespace gr {
     class DISPLAY_API show_text : virtual public sync_block
     {
      public:
-      typedef boost::shared_ptr<show_text> sptr;
+      typedef std::shared_ptr<show_text> sptr;
 
       /*!
        * \brief Return a shared_ptr to a new instance of display::show_text.
