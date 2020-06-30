@@ -1,0 +1,37 @@
+id: display_text_msg
+label: Display a text message
+flags: [ python ]
+
+category: '[Custom]/Display'
+
+parameters:
+-   id: label
+    label: Label
+    dtype: string
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   domain: message
+    id: text
+    optional: true
+
+templates:
+    imports: |-
+        from PyQt5 import Qt
+        import display
+        import sip
+    make: |-
+        <%
+            win = 'self._%s_win'%id
+        %>\
+        display.text_msg(${label})
+        ${win} = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
+        ${gui_hint() % win}
+
+documentation: |-
+    The GUI hint can be used to position the widget within the application. The hint is of the form [tab_id@tab_index]: [row, col, row_span, col_span]. Both the tab specification and the grid position are optional.
+
+file_format: 1
