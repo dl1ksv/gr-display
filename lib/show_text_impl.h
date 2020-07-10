@@ -36,7 +36,7 @@ namespace gr {
       show_text_window *d_main_gui;
 
      public:
-      show_text_impl(QWidget *parent);
+      show_text_impl(const std::string& label,QWidget *parent);
       ~show_text_impl(); 
       PyObject* pyqwidget();
 

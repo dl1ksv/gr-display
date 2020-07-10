@@ -39,7 +39,7 @@ namespace gr {
     /*
      * The private constructor
      */
-    show_image_impl::show_image_impl(int imagewidth,int imageheight,QWidget *parent)
+    show_image_impl::show_image_impl(int imagewidth,int imageheight,QWidget* parent)
       : gr::sync_block ("show_image",
                        gr::io_signature::make(2, 2, sizeof (char)),
                        gr::io_signature::make(0, 0, 0)),
@@ -73,6 +73,9 @@ namespace gr {
     {
       const unsigned char *in = (const unsigned char *) input_items[0];
       const char *ctrl = (const char *)input_items[1];
+
+      gr::thread::scoped_lock lock(d_setlock);
+
       if(d_triggered) {
       // Do signal processing
        d_main_gui->setPixel(in,noutput_items);

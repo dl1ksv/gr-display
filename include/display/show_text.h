@@ -21,11 +21,15 @@
 #ifndef INCLUDED_DISPLAY_SHOW_TEXT_H
 #define INCLUDED_DISPLAY_SHOW_TEXT_H
 
+#ifdef ENABLE_PYTHON
 #include <Python.h>
+#endif
 #include <display/api.h>
 #include <gnuradio/sync_block.h>
+
 #include <QWidget>
 
+#include <string>
 
 //class QApplication;
 
@@ -33,14 +37,14 @@ namespace gr {
   namespace display {
 
     /*!
-     * \brief <+description of block+>
+     * \brief Create a QT Text box widget (QLabel) where the values are received as stream.
      * \ingroup display
      *
      */
     class DISPLAY_API show_text : virtual public sync_block
     {
      public:
-      typedef boost::shared_ptr<show_text> sptr;
+      typedef std::shared_ptr<show_text> sptr;
 
       /*!
        * \brief Return a shared_ptr to a new instance of display::show_text.
@@ -50,9 +54,13 @@ namespace gr {
        * class. display::show_text::make is the public interface for
        * creating new instances.
        */
-      static sptr make(QWidget *parent=NULL);
-      virtual PyObject* pyqwidget()=0;
-//      QApplication *d_qApplication;
+      static sptr make(const std::string& label,QWidget *parent= 0);
+#ifdef ENABLE_PYTHON
+    virtual PyObject* pyqwidget() = 0;
+#else
+    virtual void* pyqwidget() = 0;
+#endif
+
     };
 
   } // namespace display

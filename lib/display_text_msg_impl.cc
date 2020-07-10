@@ -28,7 +28,6 @@
 
 #include <gnuradio/io_signature.h>
 #include <gnuradio/prefs.h>
-//#include <gnuradio/qtgui/utils.h>
 
 #include <boost/lexical_cast.hpp>
 
@@ -64,7 +63,7 @@ text_msg_impl::text_msg_impl(const std::string& label,
     d_text->setHeader(QString(label.c_str()));
 
     message_port_register_in(pmt::mp("text"));
-    set_msg_handler(pmt::mp("text"), boost::bind(&text_msg_impl::set_value, this, _1));
+    set_msg_handler(pmt::mp("text"), [this] (pmt::pmt_t msg) { this->text_msg_impl::set_value(msg);});
 }
 
 text_msg_impl::~text_msg_impl()

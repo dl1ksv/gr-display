@@ -34,6 +34,7 @@ public:
   explicit show_text_window(QWidget *parent = 0);
   ~show_text_window();
   void set_text(const char *c, int count);
+  void setHeader(QString header);
   
 private:
   Ui::show_text_window *ui;

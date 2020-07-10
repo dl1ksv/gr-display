@@ -44,7 +44,7 @@ namespace gr {
 
 
      public:
-      show_image_impl(int imagewidth,int imageheight,QWidget *parent=NULL);
+      show_image_impl(int imagewidth,int imageheight,QWidget *parent);
       ~show_image_impl();
 
       void displayBottomUp(bool direction);

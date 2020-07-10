@@ -8,6 +8,7 @@ parameters:
 -   id: label
     label: Label
     dtype: string
+    default: ' ""'
 -   id: gui_hint
     label: GUI Hint
     dtype: gui_hint

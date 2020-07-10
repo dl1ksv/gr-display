@@ -43,8 +43,9 @@ show_text_window::~show_text_window()
 }
 void show_text_window::set_text(const char *c, int count)
 {
-  if(count == 0)
+  if(count == 0) {
     return;
+   }
   QString s=ui->textDisplay->text()+QString::fromLatin1(c,count);
   ui->textDisplay->setText(s);
   update();
@@ -68,9 +69,17 @@ void show_text_window::text2File()
     }
 
 }
+void show_text_window::setHeader(QString header)
+{
+  if( header.isEmpty() )
+    ui->label->hide();
+  else 
+  {
+     ui->label->setText(header);
+     ui->label->show();
+  }
+}
 void show_text_window::clearText()
 {
-
   ui->textDisplay->setText("");
-
 }

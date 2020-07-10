@@ -28,6 +28,10 @@ parameters:
   default: '1'
   options: ['0','1','2','3','4','5','6','7']
   option_labels: ['Hz','KHz','MHz','GHz','Sec','mSec','uSec','nSec']
+- id: freqoffset
+  label: Frequency offset
+  dtype: float
+  default: 0
 - id: gui_hint
   label: GUI Hint
   dtype: gui_hint
@@ -55,7 +59,7 @@ templates:
         <%
            win = 'self._%s_win'%id
         %>\
-        display.lcd_display(${num_digits}, ${min_value}, ${max_value},${value},${min_step},${unit_type})
+        display.lcd_display(${num_digits}, ${min_value}, ${max_value},${value},${min_step},${unit_type},${freqoffset})
         self._${id}_win = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
         ${gui_hint() % win}
 

@@ -34,15 +34,15 @@ namespace gr {
   namespace display {
 
     show_text::sptr
-    show_text::make(QWidget *parent)
+    show_text::make(const std::string& label,QWidget *parent)
     {
-      return gnuradio::get_initial_sptr (new show_text_impl(parent));
+      return gnuradio::get_initial_sptr (new show_text_impl(label,parent));
     }
 
     /*
      * The private constructor
      */
-    show_text_impl::show_text_impl(QWidget *parent)
+    show_text_impl::show_text_impl(const std::string& label,QWidget *parent)
       : gr::sync_block("show_text",
                       gr::io_signature::make(1, 1, sizeof (char)),
                       gr::io_signature::make(0,0,0))
@@ -59,7 +59,7 @@ namespace gr {
           d_qApplication = new QApplication(argc, &argv);
         }
         d_main_gui = new show_text_window(d_parent);
-
+        d_main_gui->setHeader(QString(label.c_str()));
     }
 
     /*
@@ -68,6 +68,7 @@ namespace gr {
     show_text_impl::~show_text_impl()
     {
        d_main_gui->close();
+       delete d_main_gui;
     }
 
     int
@@ -76,10 +77,11 @@ namespace gr {
 			  gr_vector_void_star &output_items)
     {
         const char *in = (const char *) input_items[0];
-
-        // Do <+signal processing+>
-        d_main_gui->set_text(in,noutput_items);
+ 
+        gr::thread::scoped_lock lock(d_setlock);
+        
         // Tell runtime system how many output items we produced.
+        d_main_gui->set_text(in,noutput_items);
         return noutput_items;
     }
 

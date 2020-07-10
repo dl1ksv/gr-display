@@ -25,7 +25,7 @@
 
 #include <display/display_text_msg.h>
 #include "show_text_window.h"
-
+#include <qapplication.h>
 
 namespace gr {
 namespace display {
@@ -39,10 +39,11 @@ private:
     show_text_window *d_text;
 
 public:
-    text_msg_impl(const std::string& label,QWidget* parent = 0);
+    text_msg_impl(const std::string& label,QWidget* parent);
     ~text_msg_impl();
 
     void exec_();
+    QApplication* d_qApplication;
     QWidget* qwidget();
 
     PyObject* pyqwidget();

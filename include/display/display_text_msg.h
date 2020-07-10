@@ -27,8 +27,11 @@
 
 #include <gnuradio/block.h>
 #include <display/api.h>
+#ifdef ENABLE_PYTHON
 #include <Python.h>
+#endif
 #include <qapplication.h>
+#include <QWidget>
 
 #include <string>
 
@@ -63,13 +66,17 @@ public:
      * \param parent a QWidget parent in the QT app.
      *
      */
-    static sptr make(const std::string& label, QWidget* parent = NULL);
+    static sptr make(const std::string& label, QWidget* parent = 0);
 
     virtual void exec_() = 0;
     virtual QWidget* qwidget() = 0;
-    virtual PyObject* pyqwidget() =0;
+#ifdef ENABLE_PYTHON
+    virtual PyObject* pyqwidget() = 0;
+#else
+    virtual void* pyqwidget() = 0;
+#endif
 
-    QApplication* d_qApplication;
+//    QApplication* d_qApplication;
 };
 
 } /* namespace display */

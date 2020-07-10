@@ -22,13 +22,14 @@
 #ifndef INCLUDED_DISPLAY_SHOW_IMAGE_H
 #define INCLUDED_DISPLAY_SHOW_IMAGE_H
 
+#ifdef ENABLE_PYTHON
 #include <Python.h>
+#endif
 #include <display/api.h>
 #include <gnuradio/sync_block.h>
 #include <QWidget>
 
 
-class QApplication;
 class ShowPngPicture;
 
 namespace gr {
@@ -42,7 +43,7 @@ namespace gr {
    class DISPLAY_API show_image : virtual public sync_block
     {
      public:
-      typedef boost::shared_ptr<show_image> sptr;
+      typedef std::shared_ptr<show_image> sptr;
 
       /*!
        * \brief Return a shared_ptr to a new instance of display::show_image.
@@ -52,8 +53,13 @@ namespace gr {
        * class. display::show_image::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int imagewidth,int imageheight,QWidget *parent=NULL);
-      virtual PyObject* pyqwidget()=0;
+      static sptr make(int imagewidth,int imageheight,QWidget *parent = 0);
+#ifdef ENABLE_PYTHON
+    virtual PyObject* pyqwidget() = 0;
+#else
+    virtual void* pyqwidget() = 0;
+#endif
+
       virtual void displayBottomUp(bool direction) = 0;
     };
 
