@@ -14,7 +14,7 @@ copyright_owner: - Volker Schroer
 
 dependencies:
 
-  - gnuradio (>= 3.9.0)
+  - gnuradio (>= 3.9.0) with pybind
   - gr-qtgui
   - qt5
 
@@ -28,8 +28,7 @@ show_image   - to display png images.
 
 show_text    - to display ascii characters as text in a qt window.
 
-lcd_display  - to display and control numbers, that can be used control frequencies by sending messages
-               See the lcd_example in the examples directory to get an impression
+display_text_msg - display a message containing text
                
 I use show_image to receive and display some weather- satellite pictures with the funcube dongle
 and gnuradio.
