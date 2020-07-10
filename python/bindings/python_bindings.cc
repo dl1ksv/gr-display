@@ -23,7 +23,6 @@ namespace py = pybind11;
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
     void bind_display_text_msg(py::module&);
-    void bind_lcd_display(py::module&);
     void bind_show_image(py::module&);
     void bind_show_text(py::module&);
 // ) END BINDING_FUNCTION_PROTOTYPES
@@ -55,7 +54,6 @@ PYBIND11_MODULE(display_python, m)
     /**************************************/
     // BINDING_FUNCTION_CALLS(
     bind_display_text_msg(m);
-    bind_lcd_display(m);
     bind_show_image(m);
     bind_show_text(m);
     // ) END BINDING_FUNCTION_CALLS
