@@ -63,10 +63,12 @@ public:
      * \brief Constructs the Edit box block.
      *
      * \param label a label to identify the box on screen.
+     * \param message_key name of the message key or empty
+     * \param splitlength split line after splitlength characters
      * \param parent a QWidget parent in the QT app.
      *
      */
-    static sptr make(const std::string& label, QWidget* parent = 0);
+    static sptr make(const std::string& label,const std::string& message_key,int splitlength, QWidget* parent = 0);
 
     virtual void exec_() = 0;
     virtual QWidget* qwidget() = 0;
@@ -76,7 +78,6 @@ public:
     virtual void* pyqwidget() = 0;
 #endif
 
-//    QApplication* d_qApplication;
 };
 
 } /* namespace display */

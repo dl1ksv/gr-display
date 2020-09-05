@@ -1,6 +1,6 @@
 id: show_text
 label: Text Sink
-category: '[Custom]/Display'
+category: '[DL1KSV]/Display'
 
 parameters:
 

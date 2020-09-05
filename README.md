@@ -6,8 +6,9 @@ It contains three components:
 
 +  show_text        : display ascii characters as text in a qt window.
 
-+  display_text_msg : display a message containing text
++  display_text_msg : display a message containing text, or a message of type u8vector
 
+ Messages of type u8vector are provided by gr_satellites decoder, for example.
 
 I use show_image to receive and display some weather- satellite pictures with the funcube dongle
 and gnuradio.
@@ -43,19 +44,27 @@ Custom
 
      $cd build
 
-     $cmake -DCMAKE_INSTALL_PREFIX=<where gnuradio is installed> ../
+     $cmake -DCMAKE_INSTALL_PREFIX=   < where gnuradio is installed > ../
 
      $make
 
      $sudo make install
+     
+     After that you'll find in grc in DL1KSV / Display
+      
+     - Display a text message
+     
+     - PNG Image sink
+     - Text sink.
 
-     ++++ If you are unsure about <where gnuradio is installed> run
+     ++++ If you are unsure about where gnuradio is installed  run
 
      gnuradio-config-info --prefix
 
 
-     After that you'll find in grc in Custom / Display a lcd display, a PNG Image sink and a Text sink.
-
+     **Hint:** If you install gr-display to an other directory than gnuradio, don't forget to add
+     the location of your python modules to the PYTHONPATH environment variable 
+     
 
 3.    **To do**
 

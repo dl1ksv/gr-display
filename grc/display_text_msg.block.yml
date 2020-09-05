@@ -2,13 +2,21 @@ id: display_text_msg
 label: Display a text message
 flags: [ python ]
 
-category: '[Custom]/Display'
+category: '[DL1KSV]/Display'
 
 parameters:
 -   id: label
     label: Label
     dtype: string
     default: ' ""'
+-   id: messagekey
+    label: "Message key"
+    dtype: string
+    default: 'text'
+-   id: splitlength
+    label: "Split line after splitlength characters"
+    dtype: int
+    default: 80  
 -   id: gui_hint
     label: GUI Hint
     dtype: gui_hint
@@ -28,7 +36,7 @@ templates:
         <%
             win = 'self._%s_win'%id
         %>\
-        display.text_msg(${label})
+        display.text_msg(${label},${messagekey},${splitlength})
         ${win} = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
         ${gui_hint() % win}
 

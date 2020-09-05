@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(1)                                                        */
 /* BINDTOOL_HEADER_FILE(display_text_msg.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(f8f47037438a21678949508ce9c9addd)                     */
+/* BINDTOOL_HEADER_FILE_HASH(ac3e908290dc8c00988e33691874cf8a)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -32,12 +32,14 @@ void bind_display_text_msg(py::module& m)
 
     using text_msg    = ::gr::display::text_msg;
 
- 
+
     py::class_<text_msg, gr::block, gr::basic_block,
         std::shared_ptr<text_msg>>(m, "text_msg", D(text_msg))
 
         .def(py::init(&text_msg::make),
            py::arg("label"),
+           py::arg("message_key"),
+           py::arg("splitlength"),
            py::arg("parent") = (QWidget *) __null,
            D(text_msg,make)
         )
@@ -56,18 +58,15 @@ void bind_display_text_msg(py::module& m)
         )
 
 
-        //.def("pyqwidget",&text_msg::pyqwidget,
-        //    D(text_msg,pyqwidget)
-        //)
-        // For the sip conversion to python to work, the widget object
-        // needs to be explicitly converted to long long.
+//        .def("pyqwidget",&text_msg::pyqwidget,
+//            D(text_msg,pyqwidget)
+//        )
         .def(
             "pyqwidget",
             [](std::shared_ptr<text_msg> p) {
                 return PyLong_AsLongLong(p->pyqwidget());
             },
             D(text_msg, pyqwidget))
-
         ;
 
 

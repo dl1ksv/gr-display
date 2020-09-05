@@ -39,7 +39,7 @@ private:
     show_text_window *d_text;
 
 public:
-    text_msg_impl(const std::string& label,QWidget* parent);
+    text_msg_impl(const std::string& label,const std::string& message_key, int splitlength, QWidget* parent);
     ~text_msg_impl();
 
     void exec_();
@@ -49,7 +49,9 @@ public:
     PyObject* pyqwidget();
 
     void set_value(pmt::pmt_t val);
-
+private:
+    pmt::pmt_t d_message_key;
+    int d_splitlength;
 };
 
 } /* namespace qtgui */

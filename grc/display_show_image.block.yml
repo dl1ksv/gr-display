@@ -1,6 +1,6 @@
 id: show_image
 label: PNG Image Sink
-category: '[Custom]/Display'
+category: '[DL1KSV]/Display'
 
 parameters:
 

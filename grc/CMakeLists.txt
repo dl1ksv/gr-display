@@ -8,7 +8,6 @@
 
 install(FILES
     display_text_msg.block.yml
-    display_lcd_display.block.yml
     display_show_image.block.yml
     display_show_text.block.yml DESTINATION share/gnuradio/grc/blocks
 )
