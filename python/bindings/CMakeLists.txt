@@ -16,8 +16,8 @@ include(GrPybind)
 ########################################################################
 # Python Bindings
 ########################################################################
-message(STATUS "Extra includes: ${Qt5Widgets_INCLUDE_DIRS} ")
-set(extra_includes ${Qt5Widgets_INCLUDE_DIRS} )
+message(STATUS "Extra includes: ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS} ")
+set(extra_includes ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 list(APPEND display_python_files
     display_text_msg_python.cc
     show_image_python.cc
