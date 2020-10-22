@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(1)                                                       */
 /* BINDTOOL_USE_PYGCCXML(1)                                                        */
 /* BINDTOOL_HEADER_FILE(show_image.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(d8ca3394c2be4005babca65975fd30e4)                     */
+/* BINDTOOL_HEADER_FILE_HASH(fa14b3493efc832729deb291a)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -51,15 +51,13 @@ void bind_show_image(py::module& m)
         .def("pyqwidget",
             [](std::shared_ptr<show_image> p) {
                return PyLong_AsLongLong(p->pyqwidget());
-        },
-       
+        },       
             D(show_image,pyqwidget)
         )
 
 
         
-        .def("displayBottomUp",&show_image::displayBottomUp,
-       
+        .def("displayBottomUp",&show_image::displayBottomUp,       
             py::arg("direction"),
             D(show_image,displayBottomUp)
         )

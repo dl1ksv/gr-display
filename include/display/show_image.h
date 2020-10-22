@@ -22,9 +22,9 @@
 #ifndef INCLUDED_DISPLAY_SHOW_IMAGE_H
 #define INCLUDED_DISPLAY_SHOW_IMAGE_H
 
-//#ifdef ENABLE_PYTHON
+#ifdef ENABLE_PYTHON
 #include <Python.h>
-//#endif
+#endif
 #include <display/api.h>
 #include <gnuradio/sync_block.h>
 #include <QWidget>
@@ -54,11 +54,11 @@ namespace gr {
        * creating new instances.
        */
       static sptr make(int imagewidth,int imageheight,QWidget *parent = nullptr);
-//#ifdef ENABLE_PYTHON
+#ifdef ENABLE_PYTHON
     virtual PyObject* pyqwidget() = 0;
-//#else
-//    virtual void* pyqwidget() = 0;
-//#endif
+#else
+    virtual void* pyqwidget() = 0;
+#endif
 
       virtual void displayBottomUp(bool direction) = 0;
     };

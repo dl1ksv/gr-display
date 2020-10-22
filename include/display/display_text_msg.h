@@ -27,9 +27,9 @@
 
 #include <gnuradio/block.h>
 #include <display/api.h>
-//#ifdef ENABLE_PYTHON
+#ifdef ENABLE_PYTHON
 #include <Python.h>
-//#endif
+#endif
 #include <qapplication.h>
 #include <QWidget>
 
@@ -72,11 +72,11 @@ public:
 
     virtual void exec_() = 0;
     virtual QWidget* qwidget() = 0;
-//#ifdef ENABLE_PYTHON
+#ifdef ENABLE_PYTHON
     virtual PyObject* pyqwidget() = 0;
-//#else
-//    virtual void* pyqwidget() = 0;
-//#endif
+#else
+    virtual void* pyqwidget() = 0;
+#endif
 
 };
 

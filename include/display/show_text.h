@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2013 Volker Schroer, DL1KSV.
+ * Copyright 2013- 2020 Volker Schroer, DL1KSV.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ namespace gr {
        * class. display::show_text::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string& label,QWidget *parent= 0);
+      static sptr make(const std::string& label,QWidget *parent= nullptr);
 #ifdef ENABLE_PYTHON
     virtual PyObject* pyqwidget() = 0;
 #else

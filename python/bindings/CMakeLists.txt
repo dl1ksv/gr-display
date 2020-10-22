@@ -18,6 +18,10 @@ include(GrPybind)
 ########################################################################
 message(STATUS "Extra includes: ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS} ")
 set(extra_includes ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+get_directory_property( DirDefs COMPILE_DEFINITIONS )
+message(STATUS "COMPILE_DEFINITIONS = ${DirDefs}" )
+set(define_symbols ${DirDefs};__PIC__)
+message(STATUS "Definitions = ${define_symbols}" )
 list(APPEND display_python_files
     display_text_msg_python.cc
     show_image_python.cc
