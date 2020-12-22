@@ -24,7 +24,6 @@
 #define INCLUDED_DISPLAY_TEXT_MSG_H
 
 
-
 #include <gnuradio/block.h>
 #include <display/api.h>
 #ifdef ENABLE_PYTHON
@@ -44,7 +43,7 @@ namespace display {
  *
  * \details
  * This block creates a QT Text box widget that manages data
- * through message passing interfaces. It is derived from the 
+ * through message passing interfaces. It is derived from the
  * gnuradio Message Edit Box
  *
  * Message Ports:
@@ -56,7 +55,6 @@ namespace display {
 class DISPLAY_API text_msg : virtual public block
 {
 public:
-
     typedef std::shared_ptr<text_msg> sptr;
 
     /*!
@@ -68,7 +66,10 @@ public:
      * \param parent a QWidget parent in the QT app.
      *
      */
-    static sptr make(const std::string& label,const std::string& message_key,int splitlength, QWidget* parent = 0);
+    static sptr make(const std::string& label,
+                     const std::string& message_key,
+                     int splitlength,
+                     QWidget* parent = 0);
 
     virtual void exec_() = 0;
     virtual QWidget* qwidget() = 0;
@@ -77,7 +78,6 @@ public:
 #else
     virtual void* pyqwidget() = 0;
 #endif
-
 };
 
 } /* namespace display */

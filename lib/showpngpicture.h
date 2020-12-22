@@ -13,37 +13,37 @@ class ShowPngPicture;
 class ShowPngPicture : public QWidget
 {
     Q_OBJECT
-    
+
 public:
-    explicit ShowPngPicture(int width,int height,QWidget *parent = 0);
+    explicit ShowPngPicture(int width, int height, QWidget* parent = 0);
     ~ShowPngPicture();
 
     void presetBottomUp(bool order);
+
 private:
-    Ui::ShowPngPicture *ui;
+    Ui::ShowPngPicture* ui;
     int picWidth;
     int picHeight;
     int col;
     int row;
     bool reverseOrder;
 
-    QImage *p;
-    QRgb *line;
-    QWidget *displayWidget;
-//    QTimer *displayTimer;
+    QImage* p;
+    QRgb* line;
+    QWidget* displayWidget;
+    //    QTimer *displayTimer;
 
     void setNextPixel(int);
     bool saveImage(QString);
-    
 
 
 public slots:
-    void setPixel(const unsigned char *,int);
+    void setPixel(const unsigned char*, int);
     void saveImage2File();
     void storeReverse(bool order);
 
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // SHOWPNGPICTURE_HH

@@ -24,47 +24,45 @@
 #ifdef ENABLE_PYTHON
 #include <Python.h>
 #endif
-#include <display/api.h>
 #include <gnuradio/sync_block.h>
+#include <display/api.h>
 
 #include <QWidget>
 
 #include <string>
 
-//class QApplication;
+// class QApplication;
 
 namespace gr {
-  namespace display {
+namespace display {
+
+/*!
+ * \brief Create a QT Text box widget (QLabel) where the values are received as stream.
+ * \ingroup display
+ *
+ */
+class DISPLAY_API show_text : virtual public sync_block
+{
+public:
+    typedef std::shared_ptr<show_text> sptr;
 
     /*!
-     * \brief Create a QT Text box widget (QLabel) where the values are received as stream.
-     * \ingroup display
+     * \brief Return a shared_ptr to a new instance of display::show_text.
      *
+     * To avoid accidental use of raw pointers, display::show_text's
+     * constructor is in a private implementation
+     * class. display::show_text::make is the public interface for
+     * creating new instances.
      */
-    class DISPLAY_API show_text : virtual public sync_block
-    {
-     public:
-      typedef std::shared_ptr<show_text> sptr;
-
-      /*!
-       * \brief Return a shared_ptr to a new instance of display::show_text.
-       *
-       * To avoid accidental use of raw pointers, display::show_text's
-       * constructor is in a private implementation
-       * class. display::show_text::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(const std::string& label,QWidget *parent= 0);
+    static sptr make(const std::string& label, QWidget* parent = 0);
 #ifdef ENABLE_PYTHON
     virtual PyObject* pyqwidget() = 0;
 #else
     virtual void* pyqwidget() = 0;
 #endif
+};
 
-    };
-
-  } // namespace display
+} // namespace display
 } // namespace gr
 
 #endif /* INCLUDED_DISPLAY_SHOW_TEXT_H */
-

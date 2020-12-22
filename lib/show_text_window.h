@@ -23,24 +23,24 @@
 #include <QWidget>
 
 namespace Ui {
-  class show_text_window;
+class show_text_window;
 }
 
 class show_text_window : public QWidget
 {
-  Q_OBJECT
-  
+    Q_OBJECT
+
 public:
-  explicit show_text_window(QWidget *parent = 0);
-  ~show_text_window();
-  void set_text(const char *c, int count);
-  void setHeader(QString header);
-  
+    explicit show_text_window(QWidget* parent = 0);
+    ~show_text_window();
+    void set_text(const char* c, int count);
+    void setHeader(QString header);
+
 private:
-  Ui::show_text_window *ui;
+    Ui::show_text_window* ui;
 private slots:
-  void text2File();
-  void clearText();
+    void text2File();
+    void clearText();
 };
 
 #endif // SHOW_TEXT_WINDOWS_H

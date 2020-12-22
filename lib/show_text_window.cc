@@ -20,66 +20,57 @@
 #include "show_text_window.h"
 #include "ui_show_text_window.h"
 
-#include <QString>
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QString>
 #include <QTextStream>
 
 
-show_text_window::show_text_window(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::show_text_window)
+show_text_window::show_text_window(QWidget* parent)
+    : QWidget(parent), ui(new Ui::show_text_window)
 {
-  ui->setupUi(this);
-  ui->textDisplay->setText("");
-  connect(ui->clear,SIGNAL(clicked()),this,SLOT(clearText()));
-  connect(ui->save,SIGNAL(clicked()),this,SLOT(text2File()));
+    ui->setupUi(this);
+    ui->textDisplay->setText("");
+    connect(ui->clear, SIGNAL(clicked()), this, SLOT(clearText()));
+    connect(ui->save, SIGNAL(clicked()), this, SLOT(text2File()));
 }
 
-show_text_window::~show_text_window()
+show_text_window::~show_text_window() { delete ui; }
+void show_text_window::set_text(const char* c, int count)
 {
-  delete ui;
-}
-void show_text_window::set_text(const char *c, int count)
-{
-  if(count == 0) {
-    return;
-   }
-  QString s=ui->textDisplay->text()+QString::fromLatin1(c,count);
-  ui->textDisplay->setText(s);
-  update();
+    if (count == 0) {
+        return;
+    }
+    QString s = ui->textDisplay->text() + QString::fromLatin1(c, count);
+    ui->textDisplay->setText(s);
+    update();
 }
 void show_text_window::text2File()
 {
     QString fileName;
     QString dir;
     bool ok;
-    dir=QDir::homePath();
+    dir = QDir::homePath();
 
-    fileName = QFileDialog::getSaveFileName ( 0, tr ( "Save Text" ),dir , "*.txt" );
-    if ( !fileName.isEmpty() ) {
-        QFile file( fileName );
-        if ( file.open(QIODevice::WriteOnly) )
-        {
-            QTextStream stream( &file );
+    fileName = QFileDialog::getSaveFileName(0, tr("Save Text"), dir, "*.txt");
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
             stream << ui->textDisplay->text();
-        QMessageBox::information ( 0, "gr-display", QString("Text saved to file: ") + fileName);
-       }
+            QMessageBox::information(
+                0, "gr-display", QString("Text saved to file: ") + fileName);
+        }
     }
-
 }
 void show_text_window::setHeader(QString header)
 {
-  if( header.isEmpty() )
-    ui->label->hide();
-  else 
-  {
-     ui->label->setText(header);
-     ui->label->show();
-  }
+    if (header.isEmpty())
+        ui->label->hide();
+    else {
+        ui->label->setText(header);
+        ui->label->show();
+    }
 }
-void show_text_window::clearText()
-{
-  ui->textDisplay->setText("");
-}
+void show_text_window::clearText() { ui->textDisplay->setText(""); }

@@ -26,28 +26,27 @@
 class show_text_window;
 
 namespace gr {
-  namespace display {
+namespace display {
 
-    class show_text_impl : public show_text
-    {
-     private:
-      QWidget *d_parent;
-      QApplication *d_qApplication;
-      show_text_window *d_main_gui;
+class show_text_impl : public show_text
+{
+private:
+    QWidget* d_parent;
+    QApplication* d_qApplication;
+    show_text_window* d_main_gui;
 
-     public:
-      show_text_impl(const std::string& label,QWidget *parent);
-      ~show_text_impl(); 
-      PyObject* pyqwidget();
+public:
+    show_text_impl(const std::string& label, QWidget* parent);
+    ~show_text_impl();
+    PyObject* pyqwidget();
 
-      // Where all the action really happens
-      int work(int noutput_items,
-	       gr_vector_const_void_star &input_items,
-	       gr_vector_void_star &output_items);
-    };
+    // Where all the action really happens
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
+};
 
-  } // namespace display
+} // namespace display
 } // namespace gr
 
 #endif /* INCLUDED_DISPLAY_SHOW_TEXT_IMPL_H */
-

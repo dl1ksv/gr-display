@@ -23,8 +23,8 @@
 #ifndef INCLUDED_DISPLAY_TEXT_MSG_IMPL_H
 #define INCLUDED_DISPLAY_TEXT_MSG_IMPL_H
 
-#include <display/display_text_msg.h>
 #include "show_text_window.h"
+#include <display/display_text_msg.h>
 #include <qapplication.h>
 
 namespace gr {
@@ -36,10 +36,13 @@ class DISPLAY_API text_msg_impl : public text_msg
 private:
     int d_argc;
     char* d_argv;
-    show_text_window *d_text;
+    show_text_window* d_text;
 
 public:
-    text_msg_impl(const std::string& label,const std::string& message_key, int splitlength, QWidget* parent);
+    text_msg_impl(const std::string& label,
+                  const std::string& message_key,
+                  int splitlength,
+                  QWidget* parent);
     ~text_msg_impl();
 
     void exec_();
@@ -49,12 +52,13 @@ public:
     PyObject* pyqwidget();
 
     void set_value(pmt::pmt_t val);
+
 private:
     pmt::pmt_t d_message_key;
     int d_splitlength;
 };
 
-} /* namespace qtgui */
+} // namespace display
 } /* namespace gr */
 
 #endif /* INCLUDED_DISPLAY_TEXT_MSG_IMPL_H */
