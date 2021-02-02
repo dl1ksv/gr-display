@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(1)                                                        */
 /* BINDTOOL_HEADER_FILE(show_image.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(8430e9001bad58d4696bcc885d5e6f4c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(d9a4650ac558b39649af15483d018aca)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -43,15 +43,6 @@ void bind_show_image(py::module& m)
            D(show_image,make)
         )
         
-
-
-
-
-        //.def("pyqwidget",&show_image::pyqwidget,
-        //    D(show_image,pyqwidget)
-        //)
-        // For the sip conversion to python to work, the widget object
-        // needs to be explicitly converted to long long.
         .def(
             "pyqwidget",
             [](std::shared_ptr<show_image> p) {

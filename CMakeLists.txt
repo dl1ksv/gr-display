@@ -122,7 +122,7 @@ endif(APPLE)
 find_package(Doxygen)
 
 ########################################################################
-# PyBind11 Related
+# Python Related
 ########################################################################
 
 find_package(pybind11 REQUIRED)
@@ -136,7 +136,9 @@ GR_REGISTER_COMPONENT("python-support" ENABLE_PYTHON
     PYTHONLIBS_FOUND
     pybind11_FOUND
 )
-add_definitions(-DENABLE_PYTHON)
+if(ENABLE_PYTHON)
+    add_definitions(-DENABLE_PYTHON)
+endif()
 ########################################################################
 # Setup doxygen option
 ########################################################################
@@ -165,7 +167,9 @@ add_subdirectory(include/display)
 add_subdirectory(lib)
 add_subdirectory(apps)
 add_subdirectory(docs)
-add_subdirectory(python)
+if(ENABLE_PYTHON)
+    add_subdirectory(python)
+endif()    
 add_subdirectory(grc)
 
 ########################################################################

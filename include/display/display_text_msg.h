@@ -27,7 +27,10 @@
 #include <gnuradio/block.h>
 #include <display/api.h>
 #ifdef ENABLE_PYTHON
-#include <Python.h>
+#pragma push_macro("slots")
+#undef slots
+#include "Python.h"
+#pragma pop_macro("slots")
 #endif
 #include <qapplication.h>
 #include <QWidget>

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(1)                                                        */
 /* BINDTOOL_HEADER_FILE(display_text_msg.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ac3e908290dc8c00988e33691874cf8a)                     */
+/* BINDTOOL_HEADER_FILE_HASH(3e588bbfd60db2c9d9c0291aeb863e05)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -58,9 +58,6 @@ void bind_display_text_msg(py::module& m)
         )
 
 
-//        .def("pyqwidget",&text_msg::pyqwidget,
-//            D(text_msg,pyqwidget)
-//        )
         .def(
             "pyqwidget",
             [](std::shared_ptr<text_msg> p) {
