@@ -86,13 +86,16 @@ void text_msg_impl::exec_() { d_qApplication->exec(); }
 
 QWidget* text_msg_impl::qwidget() { return (QWidget*)d_text; }
 
+#ifdef ENABLE_PYTHON
 PyObject* text_msg_impl::pyqwidget()
 {
     PyObject* w = PyLong_FromVoidPtr((void*)d_text);
     PyObject* retarg = Py_BuildValue("N", w);
     return retarg;
 }
-
+#else
+void* text_msg_impl::pyqwidget() { return nullptr; }
+#endif
 void text_msg_impl::set_value(pmt::pmt_t val)
 {
 

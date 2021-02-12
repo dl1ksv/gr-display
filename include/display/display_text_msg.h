@@ -72,7 +72,7 @@ public:
     static sptr make(const std::string& label,
                      const std::string& message_key,
                      int splitlength,
-                     QWidget* parent = 0);
+                     QWidget* parent = nullptr);
 
     virtual void exec_() = 0;
     virtual QWidget* qwidget() = 0;

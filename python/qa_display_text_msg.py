@@ -28,7 +28,7 @@ class qa_display_text_msg(gr_unittest.TestCase):
         self.tb = None
 
     def test_instance(self):
-        instance = text_msg('TestString',None)
+        instance = text_msg('TestString','test',80,None)
         b = sip.wrapinstance(instance.pyqwidget(),Qt.QWidget)
 
     def test_001_descriptive_test_name(self):

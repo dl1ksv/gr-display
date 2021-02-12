@@ -16,15 +16,24 @@ include(GrPybind)
 ########################################################################
 # Python Bindings
 ########################################################################
-message(STATUS "Extra includes: ${Qt5Widgets_INCLUDE_DIRS} ")
-set(extra_includes ${Qt5Widgets_INCLUDE_DIRS} )
+message(STATUS "Extra includes: ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS} ")
+set(extra_includes ${Qt5Widgets_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+get_directory_property( DirDefs COMPILE_DEFINITIONS )
+message(STATUS "COMPILE_DEFINITIONS = ${DirDefs}" )
+set(define_symbols ${DirDefs};__PIC__)
+message(STATUS "OLd defines: $CACHE{OLD_DEFINES}" )
+message(STATUS "Definitions = ${define_symbols}" )
+string(COMPARE NOTEQUAL "$CACHE{OLD_DEFINES}" "${define_symbols}" FORCE_REBUILD )
+set(OLD_DEFINES "${define_symbols}" CACHE STRING "Save old defines" FORCE)
+message(STATUS "Bindings rebuild forced ${FORCE_REBUILD}")
+
 list(APPEND display_python_files
     display_text_msg_python.cc
     show_image_python.cc
     show_text_python.cc
     python_bindings.cc)
 
-GR_PYBIND_MAKE_OOT(display 
+GR_PYBIND_MAKE_OOT(display
    ../..
    gr::display
    "${display_python_files}")

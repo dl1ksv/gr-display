@@ -56,7 +56,7 @@ public:
      * class. display::show_image::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int imagewidth, int imageheight, QWidget* parent = 0);
+    static sptr make(int imagewidth, int imageheight, QWidget* parent = nullptr);
 #ifdef ENABLE_PYTHON
     virtual PyObject* pyqwidget() = 0;
 #else

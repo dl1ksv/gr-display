@@ -23,7 +23,6 @@
 
 #include <display/show_image.h>
 
-#include <Python.h>
 #include <QApplication>
 
 namespace gr {
@@ -50,7 +49,11 @@ public:
     void displayBottomUp(bool direction);
 
     QWidget* qwidget();
+#ifdef ENABLE_PYTHON
     PyObject* pyqwidget();
+#else
+    void* pyqwidget();
+#endif
     QApplication* d_qApplication;
 
 
