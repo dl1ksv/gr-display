@@ -17,9 +17,9 @@ namespace py = pybind11;
 
 // Headers for binding functions
 /**************************************/
-/* The following comment block is used for
-/* gr_modtool to insert function prototypes
-/* Please do not delete
+// The following comment block is used for
+// gr_modtool to insert function prototypes
+// Please do not delete
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
     void bind_display_text_msg(py::module&);
