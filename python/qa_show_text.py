@@ -11,7 +11,7 @@ from PyQt5 import Qt
 import sip
 
 try:
-    from display import show_text
+    from display_python import show_text
 except ImportError:
     import os
     import sys
@@ -29,8 +29,8 @@ class qa_show_text(gr_unittest.TestCase):
 
     def test_instance(self):
         # FIXME: Test will fail until you pass sensible arguments to the constructor
-        instance = show_text('Header', None)
-        b = sip.wrapinstance(instance.pyqwidget(),Qt.QWidget)
+        instance = show_text('Header', 80, 10, None)
+        b = sip.wrapinstance(instance.qwidget(),Qt.QWidget)
 
     def test_001_descriptive_test_name(self):
         # set up fg

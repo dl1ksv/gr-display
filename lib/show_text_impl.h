@@ -31,14 +31,22 @@ namespace display {
 class show_text_impl : public show_text
 {
 private:
+    int d_splitlength;
     QWidget* d_parent;
-    QApplication* d_qApplication;
     show_text_window* d_main_gui;
+    char* d_argv;
 
 public:
-    show_text_impl(const std::string& label, QWidget* parent);
+    show_text_impl(const std::string& label,
+                   int splitlength,
+                   int maxlines,
+                   QWidget* parent);
     ~show_text_impl();
-    PyObject* pyqwidget();
+
+    QApplication* d_qApplication;
+
+    void exec_() override;
+    QWidget* qwidget() override;
 
     // Where all the action really happens
     int work(int noutput_items,

@@ -33,31 +33,38 @@
 namespace gr {
 namespace display {
 
-show_text::sptr show_text::make(const std::string& label, QWidget* parent)
+show_text::sptr
+show_text::make(const std::string& label, int splitlength, int maxlines, QWidget* parent)
 {
-    return gnuradio::get_initial_sptr(new show_text_impl(label, parent));
+    return gnuradio::make_block_sptr<show_text_impl>(
+        label, splitlength, maxlines, parent);
 }
 
 /*
  * The private constructor
  */
-show_text_impl::show_text_impl(const std::string& label, QWidget* parent)
+show_text_impl::show_text_impl(const std::string& label,
+                               int splitlength,
+                               int maxlines,
+                               QWidget* parent)
     : gr::sync_block("show_text",
                      gr::io_signature::make(1, 1, sizeof(char)),
                      gr::io_signature::make(0, 0, 0)),
+      d_splitlength(splitlength),
       d_parent(parent)
 {
-    d_main_gui = NULL;
-    if (qApp != NULL) {
+    d_main_gui = nullptr;
+    d_argv = nullptr;
+    if (qApp != nullptr) {
         d_qApplication = qApp;
     } else {
         int argc = 1;
-        char* argv = new char;
-        argv[0] = '\0';
+        d_argv = new char;
+        d_argv[0] = '\0';
 
-        d_qApplication = new QApplication(argc, &argv);
+        d_qApplication = new QApplication(argc, &d_argv);
     }
-    d_main_gui = new show_text_window(d_parent);
+    d_main_gui = new show_text_window(d_splitlength, maxlines, d_parent);
     d_main_gui->setHeader(QString(label.c_str()));
 }
 
@@ -66,8 +73,8 @@ show_text_impl::show_text_impl(const std::string& label, QWidget* parent)
  */
 show_text_impl::~show_text_impl()
 {
-    d_main_gui->close();
-    delete d_main_gui;
+    if (d_argv != nullptr)
+        delete d_argv;
 }
 
 int show_text_impl::work(int noutput_items,
@@ -83,13 +90,9 @@ int show_text_impl::work(int noutput_items,
     return noutput_items;
 }
 
-PyObject* show_text_impl::pyqwidget()
-{
+void show_text_impl::exec_() { d_qApplication->exec(); }
 
-    PyObject* w = PyLong_FromVoidPtr((void*)d_main_gui);
-    PyObject* retarg = Py_BuildValue("N", w);
-    return retarg;
-}
+QWidget* show_text_impl::qwidget() { return d_main_gui; }
 
 } /* namespace display */
 } /* namespace gr */

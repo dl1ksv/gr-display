@@ -35,6 +35,10 @@ inputs:
     label: ctrl
     dtype:  byte
 
+asserts:
+- ${imagewidth > 0 }
+- ${imageheight > 0}
+
 templates:
     imports: |-
             from PyQt5 import Qt
@@ -48,9 +52,20 @@ templates:
            %>\
            display.show_image( ${imagewidth}, ${imageheight}  )
            self.${id}.displayBottomUp(${displaybottomup})
-           self._${id}_win = sip.wrapinstance(self.${id}.pyqwidget(), Qt.QWidget)
+           self._${id}_win = sip.wrapinstance(self.${id}.qwidget(), Qt.QWidget)
            ${gui_hint() % win}
 
+documentation: |-
+
+    Image width: The number of pixels per line
+    Image height: The maximal number of lines of the image. If this number will be overrun, the last line will be overwritten.
+    Display bottom up: Choose, if the image is painted botton up or top down. ( Usefull for displaying NOAA images )
+
+    port in: The input stream
+    port ctrl: The sink starts to display on first non zero byte received on this port. You could feed a squelch value here or a filter sync pulse.
+               If not needed, just feed the input stream here, too.
+ 
+    The GUI hint can be used to position the widget within the application. The hint is of the form [tab_id@tab_index]: [row, col, row_span, col_span]. Both the tab specification and the grid position are optional.
 file_format: 1
 
 

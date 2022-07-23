@@ -49,9 +49,9 @@ PYBIND11_MODULE(display_python, m)
     py::module::import("gnuradio.qtgui.qtgui_python");
     /**************************************/
     /* The following comment block is used for
-    /* gr_modtool to insert binding function calls
-    /* Please do not delete
-    /**************************************/
+     * gr_modtool to insert binding function calls
+     * Please do not delete
+     **************************************/
     // BINDING_FUNCTION_CALLS(
     bind_display_text_msg(m);
     bind_show_image(m);

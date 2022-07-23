@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Free Software Foundation, Inc.
+ * Copyright 2022 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -7,7 +7,7 @@
  *
  */
 #include "pydoc_macros.h"
-#define D(...) DOC(gr,display, __VA_ARGS__ )
+#define D(...) DOC(gr, display, __VA_ARGS__)
 /*
   This file contains placeholders for docstrings for the Python bindings.
   Do not edit! These were automatically extracted during the binding process
@@ -15,19 +15,19 @@
  */
 
 
- 
- static const char *__doc_gr_display_show_text = R"doc()doc";
+static const char* __doc_gr_display_show_text = R"doc()doc";
 
 
- static const char *__doc_gr_display_show_text_show_text_0 = R"doc()doc";
+static const char* __doc_gr_display_show_text_show_text_0 = R"doc()doc";
 
 
- static const char *__doc_gr_display_show_text_show_text_1 = R"doc()doc";
+static const char* __doc_gr_display_show_text_show_text_1 = R"doc()doc";
 
 
- static const char *__doc_gr_display_show_text_make = R"doc()doc";
+static const char* __doc_gr_display_show_text_make = R"doc()doc";
 
 
- static const char *__doc_gr_display_show_text_pyqwidget = R"doc()doc";
+static const char* __doc_gr_display_show_text_qwidget = R"doc()doc";
 
-  
+
+static const char* __doc_gr_display_show_text_exec_ = R"doc()doc";

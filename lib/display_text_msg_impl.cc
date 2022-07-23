@@ -37,15 +37,17 @@ namespace display {
 text_msg::sptr text_msg::make(const std::string& label,
                               const std::string& message_key,
                               int splitlength,
+                              int maxlines,
                               QWidget* parent)
 {
-    return gnuradio::get_initial_sptr(
-        new text_msg_impl(label, message_key, splitlength, parent));
+    return gnuradio::make_block_sptr<text_msg_impl>(
+        label, message_key, splitlength, maxlines, parent);
 }
 
 text_msg_impl::text_msg_impl(const std::string& label,
                              const std::string& message_key,
                              int splitlength,
+                             int maxlines,
                              QWidget* parent)
     : block("text_msg", io_signature::make(0, 0, 0), io_signature::make(0, 0, 0))
 {
@@ -57,13 +59,13 @@ text_msg_impl::text_msg_impl(const std::string& label,
     d_argv = new char;
     d_argv[0] = '\0';
 
-    if (qApp != NULL) {
+    if (qApp != nullptr) {
         d_qApplication = qApp;
     } else {
         d_qApplication = new QApplication(d_argc, &d_argv);
     }
 
-    d_text = new show_text_window(parent);
+    d_text = new show_text_window(splitlength, maxlines, parent);
     d_text->setHeader(QString(label.c_str()));
     if (message_key.empty())
         d_message_key = pmt::PMT_NIL;
@@ -75,11 +77,7 @@ text_msg_impl::text_msg_impl(const std::string& label,
                     [this](pmt::pmt_t msg) { this->text_msg_impl::set_value(msg); });
 }
 
-text_msg_impl::~text_msg_impl()
-{
-    delete d_argv;
-    delete d_text;
-}
+text_msg_impl::~text_msg_impl() { delete d_argv; }
 
 
 void text_msg_impl::exec_() { d_qApplication->exec(); }
@@ -111,33 +109,30 @@ void text_msg_impl::set_value(pmt::pmt_t val)
                 if (pmt::is_u8vector(msg)) {
                     size_t len;
                     const uint8_t* c = pmt::u8vector_elements(msg, len);
-                    GR_LOG_WARN(d_logger,
-                                boost::format("Found a vector of length ='%1%' ") % len);
+                    d_logger->warn("Found a vector of length = {:d} ", len);
                     for (size_t i = 0; i < len; i++) {
                         xs += c[i];
                         if (c[i] == '\n')
-                            GR_LOG_WARN(d_logger,
-                                        boost::format("Newline found at '%1%'") % i);
+                            d_logger->warn("Newline found at {:d}", i);
                     }
                     xs += '\n';
                 } else {
-                    GR_LOG_WARN(
-                        d_logger,
+                    d_logger->warn(
                         "Message pair did not contain a valid text message or vector");
                     return;
                 }
             }
         } else {
-            GR_LOG_WARN(d_logger,
-                        boost::format("Message must have the key = '%1%' ; got '%2%'.") %
-                            pmt::write_string(d_message_key) % pmt::write_string(key));
+            d_logger->warn("Message must have the key = {:s} ; got {:s}.",
+                           pmt::write_string(d_message_key),
+                           pmt::write_string(key));
             return;
         }
     } else {
         if (pmt::is_symbol(val)) {
             xs = pmt::symbol_to_string(val);
         } else {
-            GR_LOG_WARN(d_logger, "Did not find a valid message");
+            d_logger->warn("Did not find a valid message");
             return;
         }
     }

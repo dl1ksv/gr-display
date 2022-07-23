@@ -11,7 +11,7 @@ from PyQt5 import Qt
 import sip
 
 try:
-    from display import show_image
+    from display_python import show_image
 except ImportError:
     import os
     import sys
@@ -29,7 +29,7 @@ class qa_show_image(gr_unittest.TestCase):
 
     def test_instance(self):
         instance = show_image(1024 ,512,None)
-        b = sip.wrapinstance(instance.pyqwidget(),Qt.QWidget)        
+        b = sip.wrapinstance(instance.qwidget(),Qt.QWidget)        
 
     def test_001_descriptive_test_name(self):
         # set up fg

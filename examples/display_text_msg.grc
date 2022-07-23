@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Test a test message
+    title: Display a test message
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -58,7 +58,7 @@ blocks:
     bus_structure: null
     coordinate: [1320, 104.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_message_strobe_0
   id: blocks_message_strobe
   parameters:
@@ -67,37 +67,38 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msg: pmt.intern("Gutta cavat lapidem non vi sed saepe cadendo")
+    msg: pmt.intern('Gutta cavat lapidem non vi sed saepe cadendo manus manum lavat')
     period: '1000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 272.0]
+    coordinate: [704, 236.0]
     rotation: 0
     state: true
-- name: qtgui_display_text_msg_0
-  id: qtgui_display_text_msg
+- name: display_text_msg_0
+  id: display_text_msg
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     gui_hint: ''
-    label: ' "Header"'
-    messagekey: TEST
+    label: '  Received text message'
+    maxlines: '6'
+    messagekey: TEXT
     splitlength: '42'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1072, 412.0]
+    coordinate: [1200, 276.0]
     rotation: 0
     state: true
 
 connections:
 - [blocks_message_strobe_0, strobe, blocks_message_debug_0, print]
-- [blocks_message_strobe_0, strobe, qtgui_display_text_msg_0, text]
+- [blocks_message_strobe_0, strobe, display_text_msg_0, text]
 
 metadata:
   file_format: 1
-  grc_version: v3.11.0.0git-84-g6963cf5a
+  grc_version: v3.11-compat-xxx-xunknown
