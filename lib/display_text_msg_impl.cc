@@ -30,7 +30,7 @@
 #include <gnuradio/prefs.h>
 
 #include <boost/lexical_cast.hpp>
-
+#include <boost/format.hpp>
 namespace gr {
 namespace display {
 
