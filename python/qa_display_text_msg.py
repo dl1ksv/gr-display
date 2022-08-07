@@ -17,7 +17,7 @@ except ImportError:
     import sys
     dirname, filename = os.path.split(os.path.abspath(__file__))
     sys.path.append(os.path.join(dirname, "bindings"))
-    from display import display_text_msg
+    from display import text_msg
 
 class qa_display_text_msg(gr_unittest.TestCase):
 

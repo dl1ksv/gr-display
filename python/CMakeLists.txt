@@ -31,6 +31,7 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-display)
+set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/python/bindings)
 GR_ADD_TEST(qa_display_text_msg ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_display_text_msg.py)
 GR_ADD_TEST(qa_show_image ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_show_image.py)
 GR_ADD_TEST(qa_show_text ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_show_text.py)
