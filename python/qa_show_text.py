@@ -11,7 +11,7 @@ from PyQt5 import Qt
 import sip
 
 try:
-    from display import show_text
+    from display_python import show_text
 except ImportError:
     import os
     import sys
