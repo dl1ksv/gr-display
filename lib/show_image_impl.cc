@@ -97,16 +97,8 @@ void show_image_impl::displayBottomUp(bool direction)
 }
 
 QWidget* show_image_impl::qwidget() { return d_main_gui; }
-#ifdef ENABLE_PYTHON
-PyObject* show_image_impl::pyqwidget()
-{
 
-    PyObject* w = PyLong_FromVoidPtr((void*)d_main_gui);
-    PyObject* retarg = Py_BuildValue("N", w);
-    return retarg;
-}
-#else
-void* show_image_impl::pyqwidget() { return nullptr; }
-#endif
+void show_image_impl::exec_() { d_qApplication->exec(); }
+
 } /* namespace display */
 } /* namespace gr */

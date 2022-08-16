@@ -28,16 +28,16 @@
 namespace gr {
 namespace display {
 
-class show_image_impl : public show_image
+class DISPLAY_API show_image_impl : public show_image
 {
 private:
     /* Variables */
 
-    QWidget* d_parent;
-
     int nx_samples;
     int d_width;
     int d_height;
+    QWidget* d_parent;
+
     bool d_triggered;
     ShowPngPicture* d_main_gui;
 
@@ -48,14 +48,10 @@ public:
 
     void displayBottomUp(bool direction);
 
-    QWidget* qwidget();
-#ifdef ENABLE_PYTHON
-    PyObject* pyqwidget();
-#else
-    void* pyqwidget();
-#endif
     QApplication* d_qApplication;
 
+    void exec_() override;
+    QWidget* qwidget() override;
 
     // Where all the action really happens
     int work(int noutput_items,

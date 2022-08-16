@@ -23,7 +23,7 @@ set(display_moc_hdrs
 )
 
 QT5_WRAP_CPP(display_moc_srcs ${display_moc_hdrs})
-QT5_WRAP_UI(display_ui_hdrs showpngpicture.ui show_text_window.ui)
+QT5_WRAP_UI(display_ui_hdrs showpngpicture.ui)
 
 list(APPEND display_sources
     ${display_moc_srcs}
@@ -43,7 +43,10 @@ endif(NOT display_sources)
 
 add_library(gnuradio-display SHARED ${display_sources})
 target_link_libraries(gnuradio-display PUBLIC
-	gnuradio::gnuradio-runtime ${QT_LIBRARIES} Python::Python)
+	gnuradio::gnuradio-runtime
+        gnuradio::gnuradio-blocks
+        Qt5::Widgets
+        Python::Python)
 target_include_directories(gnuradio-display
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

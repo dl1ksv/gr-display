@@ -25,12 +25,11 @@ message(STATUS "OLd defines: $CACHE{OLD_DEFINES}" )
 message(STATUS "Definitions = ${define_symbols}" )
 string(COMPARE NOTEQUAL "$CACHE{OLD_DEFINES}" "${define_symbols}" FORCE_REBUILD )
 set(OLD_DEFINES "${define_symbols}" CACHE STRING "Save old defines" FORCE)
-message(STATUS "Bindings rebuild forced ${FORCE_REBUILD}")
 
 list(APPEND display_python_files
     display_text_msg_python.cc
-    show_image_python.cc
     show_text_python.cc
+    show_image_python.cc
     python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(display

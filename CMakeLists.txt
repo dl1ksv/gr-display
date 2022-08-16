@@ -28,12 +28,15 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
 # Make sure our local CMake Modules path comes first
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
-
 # Set the version information here
 set(VERSION_MAJOR 3)
-set(VERSION_API   9)
+set(VERSION_API   11)
 set(VERSION_ABI   0)
-set(VERSION_PATCH git)
+set(VERSION_PATCH 0)
+
+# First find gnuradio to get access to required cmake modules
+
+find_package(Gnuradio "3.11" REQUIRED runtime blocks fft filter qtgui)
 
 cmake_policy(SET CMP0011 NEW)
 
@@ -41,44 +44,15 @@ cmake_policy(SET CMP0011 NEW)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ########################################################################
-# Compiler specific setup
+# Compiler settings
 ########################################################################
-if((CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
-    CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    AND NOT WIN32)
-    #http://gcc.gnu.org/wiki/Visibility
-    add_definitions(-fvisibility=hidden)
-endif()
-
-IF(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_CXX_STANDARD 11)
-ELSEIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_CXX_STANDARD 11)
-ELSEIF(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_CXX_STANDARD 11)
-ELSE()
-    message(WARNING "C++ standard could not be set because compiler is not GNU, Clang or MSVC.")
-ENDIF()
-
-IF(CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_C_STANDARD 11)
-ELSEIF(CMAKE_C_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_C_STANDARD 11)
-ELSEIF(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_C_STANDARD 11)
-ELSE()
-    message(WARNING "C standard could not be set because compiler is not GNU, Clang or MSVC.")
-ENDIF()
-
+set(GCC_MIN_VERSION "8.3.0")
+include(GrCompilerSettings)
 ########################################################################
 # Install directories
 ########################################################################
-find_package(Gnuradio "3.9" REQUIRED runtime blocks fft filter qtgui)
 include(GrVersion)
 find_package(Qt5Widgets REQUIRED )
-set(QT_FOUND ${Qt5Widgets_FOUND})
-set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES})
-set(QT_INCLUDE_DIRS ${Qt5Widgets_INCLUDE_DIRS})
 
 find_package(PythonLibs 3)
 include(GrPython)
