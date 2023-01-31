@@ -30,13 +30,13 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 # Set the version information here
 set(VERSION_MAJOR 3)
-set(VERSION_API   11)
+set(VERSION_API   10)
 set(VERSION_ABI   0)
 set(VERSION_PATCH 0)
 
 # First find gnuradio to get access to required cmake modules
 
-find_package(Gnuradio "3.11" REQUIRED runtime blocks fft filter qtgui)
+find_package(Gnuradio "3.10" REQUIRED runtime blocks fft filter qtgui)
 
 cmake_policy(SET CMP0011 NEW)
 
@@ -139,7 +139,6 @@ add_custom_target(uninstall
 ########################################################################
 add_subdirectory(include/display)
 add_subdirectory(lib)
-add_subdirectory(apps)
 add_subdirectory(docs)
 if(ENABLE_PYTHON)
     add_subdirectory(python)
