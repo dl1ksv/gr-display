@@ -136,7 +136,7 @@ void text_msg_impl::set_value(pmt::pmt_t val)
             return;
         }
     }
-    if (d_splitlength < 0) // Do not split
+    if (d_splitlength <= 0) // Do not split
         d_text->set_text(xs.c_str(), xs.size());
     else {
         std::string::size_type length = xs.size();
